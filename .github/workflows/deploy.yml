@@ -3,6 +3,10 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [ main, master ]
+  workflow_run:
+    workflows: ["Update Blog from Telegram"]
+    types:
+      - completed
 
 concurrency:
   group: deploy-${{ github.ref }}
@@ -16,6 +20,8 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Run on push OR on successful workflow_run
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
     
     steps:
     - name: Checkout
