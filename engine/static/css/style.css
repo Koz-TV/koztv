@@ -528,10 +528,17 @@ h1:empty,
   color: var(--accent-color);
   font-size: 1.5em;
   transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
 }
 
 .social-icons a:hover {
   opacity: 0.8;
+}
+
+.social-icons a svg {
+  width: 1em;
+  height: 1em;
 }
 
 /* YouTube subscribe button - lightweight alternative to Google widget */
@@ -555,26 +562,11 @@ h1:empty,
   background-image: none;
 }
 
-.social-icons .yt-subscribe-btn i {
-  visibility: visible;
-  opacity: 1;
-  width: auto;
-  height: auto;
+.social-icons .yt-subscribe-btn svg {
+  width: 1.2em;
+  height: 1.2em;
 }
 
-/* Social icons adjustments */
-.social-icons i {
-  display:inline-block;
-  width:1.2em;
-  height:1.2em;
-  visibility:hidden;
-  opacity:0;
-  transition: opacity 0.3s;
-}
-.social-icons i.fa-loaded {
-  visibility:visible;
-  opacity:1;
-}
 
 /* Image fade-in after full load */
 .img-wrapper img { visibility:hidden; opacity:0; transition:opacity 0.4s ease-out; }
@@ -794,8 +786,11 @@ body.home nav.narrow {
 
 /* Original link to Telegram */
 /* original-link uses default link styles with animated underline */
-.original-link .fa-telegram {
+.original-link .tg-icon {
+  width: 1em;
+  height: 1em;
   color: #0088cc;
+  vertical-align: -0.125em;
 }
 
 /* Continuation and next post links */
