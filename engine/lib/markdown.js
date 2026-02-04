@@ -15,8 +15,8 @@ let currentMdDir = '';
 
 // Navigation translations
 const navTranslations = {
-    en: { workWithMe: 'Work with me' },
-    ru: { workWithMe: 'Поработать' }
+    en: { home: 'Home', projects: 'Projects', blog: 'Blog', workWithMe: 'Work with me' },
+    ru: { home: 'Главная', projects: 'Проекты', blog: 'Блог', workWithMe: 'Поработать со мной' }
 };
 
 // Настраиваем marked для обработки ссылок
@@ -240,6 +240,9 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         lang: currentLang,
         langPrefix: langPrefix,
         langSwitcher: langSwitcher,
+        navHome: nav.home,
+        navProjects: nav.projects,
+        navBlog: nav.blog,
         navWorkWithMe: nav.workWithMe,
         googleAnalytics: config.googleAnalytics ?
             `<script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics}"></script>
@@ -269,6 +272,9 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{lang}}/g, templateVariables.lang)
         .replace(/{{langPrefix}}/g, templateVariables.langPrefix)
         .replace(/{{langSwitcher}}/g, templateVariables.langSwitcher)
+        .replace(/{{navHome}}/g, templateVariables.navHome)
+        .replace(/{{navProjects}}/g, templateVariables.navProjects)
+        .replace(/{{navBlog}}/g, templateVariables.navBlog)
         .replace(/{{navWorkWithMe}}/g, templateVariables.navWorkWithMe)
         .replace(/{{originalLink}}/g, templateVariables.originalLink || '')
         .replace('{{content}}', templateVariables.content);

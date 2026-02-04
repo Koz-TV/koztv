@@ -6,29 +6,23 @@ I help developers and founders ship better products faster.
 
 ## Mentorship
 
-One-on-one sessions for developers and product people.
+One-on-one sessions for founders, product managers, analysts, or anyone looking to build their own product.
 
-**For developers:** architecture decisions, career growth, code quality, modern tools and practices.
+MVP strategy, architecture decisions, product thinking, career growth, modern tools and practices — when to build vs buy.
 
-**For founders:** MVP strategy, technical decisions without a CTO, product thinking, when to build vs buy.
+I can also work with your team.
 
 Regular or one-time sessions — whatever works for you.
 
 ## Contract work
 
 I take on select projects where I can make a real impact:
+- Product consulting and strategy
+- Architecture design
 - Full-stack development (React, Node.js, TypeScript)
 - MVP development from idea to launch
 - Performance optimization and refactoring
 - Setting up CI/CD, infrastructure, DevOps
-
-## Code review
-
-Fresh eyes on your codebase:
-- Architecture review and recommendations
-- Security audit
-- Performance bottleneck analysis
-- Best practices and patterns
 
 ## Partnership
 
