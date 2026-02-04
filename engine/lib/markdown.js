@@ -643,14 +643,14 @@ function generateLanguageSwitcher(currentLang, slug, type = 'post', folderSlug =
     if (availableLangs.length <= 1) return '';
 
     const langNames = {
-        en: 'English',
-        ru: 'Русский',
-        de: 'Deutsch',
+        en: 'EN',
+        ru: 'РУ',
+        de: 'DE',
         zh: '中文',
-        es: 'Español',
-        fr: 'Français',
-        ja: '日本語',
-        ko: '한국어'
+        es: 'ES',
+        fr: 'FR',
+        ja: 'JA',
+        ko: 'KO'
     };
 
     // Map type to URL path segment
