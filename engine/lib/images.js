@@ -252,19 +252,19 @@ function createOptimalSrc(imagePath, imageName, optimalSize = 960, currentMdDir 
 }
 
 // Создает sizes атрибут для responsive изображений
-function createSizes() {
-    const { responsive } = config.images;
-    const parts = [];
-    
-    // Добавляем брейкпоинты
-    for (const bp of responsive.breakpoints) {
-        parts.push(`(max-width: ${bp.maxWidth}px) ${bp.width}`);
+// Учитывает контекст: grid (сетка проектов), featured (главный проект), content (статьи)
+function createSizes(context = 'default') {
+    // Для сетки проектов: 3 колонки на desktop, 2 на tablet, 1 на mobile
+    // Соответствует CSS: column-count: 3/2/1 в style.css
+    if (context === 'grid') {
+        return '(max-width: 500px) 96vw, (max-width: 800px) 48vw, 31vw';
     }
-    
-    // Добавляем максимальную ширину для больших экранов
-    parts.push(responsive.maxWidth);
-    
-    return parts.join(', ');
+    // Для featured проекта: полная ширина контента
+    if (context === 'featured') {
+        return '(max-width: 500px) 96vw, (max-width: 960px) 96vw, 960px';
+    }
+    // Для контента (статьи, посты): ширина контента (575px max)
+    return '(max-width: 480px) 96vw, (max-width: 960px) 90vw, 575px';
 }
 
 // Создает HTML для изображения с поддержкой WebP/AVIF и responsive sizes
@@ -326,7 +326,7 @@ function createImageHtml(href, title, text, currentMdDir = '', context = 'defaul
 
     // Создаем srcset и оптимальный src с абсолютными путями
     const srcset = createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
-    const sizes = createSizes();
+    const sizes = createSizes(context);
     const optimalSrc = createOptimalSrcAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
 
     const loadingAttr = eager ? 'eager' : 'lazy';
