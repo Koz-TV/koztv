@@ -93,6 +93,19 @@ function adjustPathForLanguage(relPath, srcFullPath = null) {
         return { adjustedPath: mediaPath, folderSlug };
     }
 
+    // Pattern: {lang}/{page}.md (non-default language standalone pages)
+    if (pathParts.length === 2 && languages.includes(pathParts[0]) && pathParts[1].endsWith('.md') && pathParts[1] !== 'index.md') {
+        const lang = pathParts[0];
+        const slug = pathParts[1].replace('.md', '');
+        return { adjustedPath: path.join(lang, slug, 'index.md'), folderSlug: null };
+    }
+
+    // Pattern: {page}.md (default language standalone pages)
+    if (pathParts.length === 1 && pathParts[0].endsWith('.md') && pathParts[0] !== 'index.md') {
+        const slug = pathParts[0].replace('.md', '');
+        return { adjustedPath: path.join(slug, 'index.md'), folderSlug: null };
+    }
+
     return { adjustedPath: relPath, folderSlug: null };
 }
 
