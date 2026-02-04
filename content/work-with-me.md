@@ -16,6 +16,8 @@ Regular or one-time sessions — whatever works for you.
 
 ## Contract work
 
+I work with individuals and businesses (via KOZDEV LLC).
+
 I take on select projects where I can make a real impact:
 - Product consulting and strategy
 - Architecture design
