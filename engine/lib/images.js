@@ -327,10 +327,12 @@ function createImageHtml(href, title, text, currentMdDir = '', context = 'defaul
     const optimalSrc = createOptimalSrcAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
 
     const loadingAttr = eager ? 'eager' : 'lazy';
+    // fetchpriority="high" для LCP изображения (featured проект)
+    const priorityAttr = (eager && context === 'featured') ? ' fetchpriority="high"' : '';
     return `<picture>
         <source type="image/avif" srcset="${srcsetAvif}" sizes="${sizes}">
         <source type="image/webp" srcset="${srcsetWebp}" sizes="${sizes}">
-        <img loading="${loadingAttr}" decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcsetWebp}" sizes="${sizes}">
+        <img loading="${loadingAttr}"${priorityAttr} decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcsetWebp}" sizes="${sizes}">
     </picture>`;
 }
 
