@@ -916,7 +916,7 @@ function generateProjectsMarkup(lang = null) {
     if(!featuredProject && metas.length) featuredProject = metas[0];
     const others = metas.filter(m=>m!==featuredProject);
 
-    const makeAnchor = m => {
+    const makeAnchor = (m, eager = false) => {
         const videoAttr = m.hasVideo ? ' data-video' : '';
         // Use absolute paths with / prefix so they work from any language version
         const imgSrc = m.cover ? `/projects/${m.folderSlug}/${m.cover}` : '';
@@ -934,15 +934,18 @@ function generateProjectsMarkup(lang = null) {
         if (imgSrc) {
             // Используем контекст для определения оптимального размера
             const context = m === featuredProject ? 'featured' : 'grid';
-            imgTag = createImageHtml(imgSrc, m.title, m.title, '', context);
+            // eager = true для featured и первых 3 проектов в сетке (выше fold)
+            imgTag = createImageHtml(imgSrc, m.title, m.title, '', context, eager);
         }
         // Use language prefix for project URLs
         return `<a class="project-item${m===featuredProject?' full':''}" href="${urlPrefix}/projects/${m.slug}/"${videoAttr}${ratioStyle}>${imgTag}<span class="caption">${m.title}</span></a>`;
     };
 
+    // Featured project always eager, first 3 grid projects eager, rest lazy
+    const EAGER_GRID_COUNT = 3;
     return {
-        featured: featuredProject ? makeAnchor(featuredProject) : '',
-        grid: others.map(makeAnchor).join('\n\n')
+        featured: featuredProject ? makeAnchor(featuredProject, true) : '',
+        grid: others.map((p, i) => makeAnchor(p, i < EAGER_GRID_COUNT)).join('\n\n')
     };
 }
 

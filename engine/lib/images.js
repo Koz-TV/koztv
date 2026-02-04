@@ -268,7 +268,8 @@ function createSizes() {
 }
 
 // Создает HTML для изображения с поддержкой WebP/AVIF и responsive sizes
-function createImageHtml(href, title, text, currentMdDir = '', context = 'default') {
+// eager: true - load immediately (above fold), false - lazy load (below fold)
+function createImageHtml(href, title, text, currentMdDir = '', context = 'default', eager = false) {
     // Original href for finding source files
     const originalHref = href.startsWith('/') ? href.substring(1) : href;
 
@@ -328,10 +329,11 @@ function createImageHtml(href, title, text, currentMdDir = '', context = 'defaul
     const sizes = createSizes();
     const optimalSrc = createOptimalSrcAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
 
+    const loadingAttr = eager ? 'eager' : 'lazy';
     return `<picture>
         <source type="image/avif" srcset="${avif}">
         <source type="image/webp" srcset="${webp}">
-        <img loading="lazy" decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcset}" sizes="${sizes}">
+        <img loading="${loadingAttr}" decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcset}" sizes="${sizes}">
     </picture>`;
 }
 
