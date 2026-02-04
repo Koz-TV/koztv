@@ -35,18 +35,17 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdnjs.cloudflare.com">
 
+    <!-- Google Fonts with font-display: swap for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap"></noscript>
+
     <!-- Font Awesome (loaded after initial render) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
 
     <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
     <link rel="preload" href="{{styleCss}}" as="style">
     <link rel="stylesheet" href="{{styleCss}}">
-    
-    <!-- Google Analytics 4 -->
-    {{googleAnalytics}}
-
-    <!-- Yandex Metrika -->
-    {{yandexMetrika}}
 
     <script>
         {{devReload}}
@@ -83,5 +82,9 @@
             });
         }
     </script>
+
+    <!-- Analytics deferred to not block rendering -->
+    {{googleAnalytics}}
+    {{yandexMetrika}}
 </body>
 </html> 

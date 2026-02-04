@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;700&display=swap');
+/* Fonts loaded via preload in HTML head for better performance */
 
 /* RESET */
 *, *::before, *::after { box-sizing: border-box; }
@@ -534,18 +534,32 @@ h1:empty,
   opacity: 0.8;
 }
 
-/* YouTube subscribe widget styling */
-.social-icons .g-ytsubscribe {
-  display: inline-block;
-  vertical-align: middle;
-  transform: scale(0.8);
-  transform-origin: left center;
+/* YouTube subscribe button - lightweight alternative to Google widget */
+.social-icons .yt-subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  background: #c00;
+  color: #fff !important;
+  padding: 0.35em 0.7em;
+  border-radius: 4px;
+  font-size: 0.85em;
+  font-weight: 500;
+  text-decoration: none;
+  background-image: none;
+  transition: background 0.2s;
 }
 
-.social-icons .g-ytsubscribe iframe {
-  border: none;
-  margin: 0;
-  padding: 0;
+.social-icons .yt-subscribe-btn:hover {
+  background: #900;
+  background-image: none;
+}
+
+.social-icons .yt-subscribe-btn i {
+  visibility: visible;
+  opacity: 1;
+  width: auto;
+  height: auto;
 }
 
 /* Social icons adjustments */
@@ -598,15 +612,15 @@ body.home nav.narrow {
   .social-icons {
     gap: calc(var(--gap) * 0.6);
   }
-  
+
   .social-icons a {
     font-size: 1.3em;
   }
-  
-  .social-icons .g-ytsubscribe {
-    transform: scale(0.7);
+
+  .social-icons .yt-subscribe-btn {
+    font-size: 0.75em;
   }
-  
+
   /* Navigation adjustments for tablets */
   nav.narrow {
     gap: calc(var(--gap) * 1.2);
@@ -617,13 +631,14 @@ body.home nav.narrow {
   .social-icons {
     gap: calc(var(--gap) * 0.5);
   }
-  
+
   .social-icons a {
     font-size: 1.2em;
   }
-  
-  .social-icons .g-ytsubscribe {
-    transform: scale(0.6);
+
+  .social-icons .yt-subscribe-btn {
+    font-size: 0.7em;
+    padding: 0.3em 0.5em;
   }
 }
 
@@ -665,13 +680,14 @@ body.home nav.narrow {
     justify-content: flex-start;
     gap: calc(var(--gap) * 0.4);
   }
-  
+
   .social-icons a {
     font-size: 1.1em;
   }
-  
-  .social-icons .g-ytsubscribe {
-    transform: scale(0.5);
+
+  .social-icons .yt-subscribe-btn {
+    font-size: 0.65em;
+    padding: 0.25em 0.4em;
   }
   
   /* Navigation adjustments for mobile */

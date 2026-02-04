@@ -1,6 +1,6 @@
 <!-- Intro / Hero layout -->
 <div class="about">
-  <div class="about_photo" aria-label="Миша Коз"></div>
+  <div class="about_photo" role="img" aria-label="Миша Коз"></div>
 
   <div class="about_inner">
     <div class="lead-main">

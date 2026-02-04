@@ -18,18 +18,26 @@ const socialConfig = {
     }
 };
 
+const subscribeText = {
+    en: 'Subscribe',
+    ru: 'Подписаться'
+};
+
 // Helper to generate HTML block with social icons and subscriber counts
 function generateSocialIconsHtml(subs, lang = 'en') {
     const config = socialConfig[lang] || socialConfig.en;
+    const subText = subscribeText[lang] || subscribeText.en;
 
     const linksHtml = config.links.map(link => {
         const count = subs[link.platform] ? `<span class='sub-count'>${subs[link.platform]}</span>` : '';
-        return `<a href="${link.url}" title="${link.title}"><i class="${link.icon}"></i>${count}</a>`;
+        return `<a href="${link.url}" title="${link.title}" aria-label="${link.title}" target="_blank" rel="noopener"><i class="${link.icon}" aria-hidden="true"></i>${count}</a>`;
     }).join('\n    ');
 
-    return `<script src="https://apis.google.com/js/platform.js"></script>
-<div class="social-icons">
-    <div class="g-ytsubscribe" data-channelid="${config.youtube.channelId}" data-layout="default" data-count="default"></div>
+    // Lightweight YouTube subscribe link instead of heavy Google API widget
+    const ytSubscribeUrl = `https://www.youtube.com/channel/${config.youtube.channelId}?sub_confirmation=1`;
+
+    return `<div class="social-icons">
+    <a href="${ytSubscribeUrl}" class="yt-subscribe-btn" title="YouTube" aria-label="${subText} YouTube" target="_blank" rel="noopener"><i class="fab fa-youtube" aria-hidden="true"></i> <span>${subText}</span></a>
     ${linksHtml}
   </div>`;
 }
