@@ -226,10 +226,80 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         displayTitle = displayTitle.replace(metadata.title_link.text, linkHtml);
     }
 
+    // SEO variables
+    const siteName = 'Mike Koz';
+    const siteUrl = config.cname ? `https://${config.cname}` : '';
+    const plainTitle = metadata.title || '';
+    const isHomePage = !plainTitle || metadata.bodyClass === 'home';
+
+    // Page title: "Title | Site" or just "Site" for homepage
+    const pageTitle = isHomePage ? siteName : `${plainTitle} | ${siteName}`;
+
+    // Meta description
+    const defaultDescriptions = {
+        en: 'Mike Koz – founder of chess.rodeo. Experimenting with software, hardware, and chess.',
+        ru: 'Миша Коз – основатель chess.rodeo. Эксперименты с софтом, железом и шахматами.'
+    };
+    const metaDescription = metadata.description || defaultDescriptions[currentLang] || defaultDescriptions.en;
+
+    // Canonical URL
+    const slug = langOptions.slug || '';
+    const contentTypePlural = langOptions.type === 'post' ? 'posts' : langOptions.type === 'project' ? 'projects' : '';
+    let pagePath = '';
+    if (isHomePage) {
+        pagePath = langPrefix ? `${langPrefix}/` : '/';
+    } else if (contentTypePlural && slug) {
+        pagePath = `${langPrefix}/${contentTypePlural}/${slug}/`;
+    } else if (slug) {
+        pagePath = `${langPrefix}/${slug}/`;
+    } else {
+        pagePath = langPrefix ? `${langPrefix}/` : '/';
+    }
+    const canonicalUrl = `${siteUrl}${pagePath}`;
+
+    // OG type
+    const ogType = langOptions.type === 'post' ? 'article' : 'website';
+
+    // OG locale
+    const ogLocales = { en: 'en_US', ru: 'ru_RU' };
+    const ogLocale = ogLocales[currentLang] || 'en_US';
+
+    // OG image (default to logo, could be overridden by metadata.image)
+    const ogImage = metadata.image ? `${siteUrl}${metadata.image}` : `${siteUrl}/static/img/logo.webp`;
+
+    // Hreflang tags
+    let hreflangTags = '';
+    if (languages.length > 1) {
+        const hreflangLinks = languages.map(lang => {
+            const langPrefixForLang = lang === defaultLang ? '' : `/${lang}`;
+            let hrefPath = '';
+            if (isHomePage) {
+                hrefPath = langPrefixForLang ? `${langPrefixForLang}/` : '/';
+            } else if (contentTypePlural && slug) {
+                hrefPath = `${langPrefixForLang}/${contentTypePlural}/${slug}/`;
+            } else if (slug) {
+                hrefPath = `${langPrefixForLang}/${slug}/`;
+            } else {
+                hrefPath = langPrefixForLang ? `${langPrefixForLang}/` : '/';
+            }
+            return `<link rel="alternate" hreflang="${lang}" href="${siteUrl}${hrefPath}">`;
+        });
+        hreflangLinks.push(`<link rel="alternate" hreflang="x-default" href="${siteUrl}/">`);
+        hreflangTags = hreflangLinks.join('\n    ');
+    }
+
     // Подготавливаем переменные для шаблона
     const nav = navTranslations[currentLang] || navTranslations.en;
     const templateVariables = {
         title: displayTitle,
+        pageTitle: pageTitle,
+        metaDescription: metaDescription,
+        canonicalUrl: canonicalUrl,
+        ogTitle: plainTitle || siteName,
+        ogType: ogType,
+        ogImage: ogImage,
+        ogLocale: ogLocale,
+        hreflangTags: hreflangTags,
         date: dateStr,
         originalLink: originalLinkHtml,
         bodyClass: metadata.bodyClass || '',
@@ -274,6 +344,14 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     // Затем подставляем остальные переменные
     return processedTemplate
         .replace(/{{title}}/g, templateVariables.title)
+        .replace(/{{pageTitle}}/g, templateVariables.pageTitle)
+        .replace(/{{metaDescription}}/g, templateVariables.metaDescription)
+        .replace(/{{canonicalUrl}}/g, templateVariables.canonicalUrl)
+        .replace(/{{ogTitle}}/g, templateVariables.ogTitle)
+        .replace(/{{ogType}}/g, templateVariables.ogType)
+        .replace(/{{ogImage}}/g, templateVariables.ogImage)
+        .replace(/{{ogLocale}}/g, templateVariables.ogLocale)
+        .replace(/{{hreflangTags}}/g, templateVariables.hreflangTags)
         .replace(/{{date}}/g, templateVariables.date)
         .replace(/{{bodyClass}}/g, templateVariables.bodyClass)
         .replace(/{{year}}/g, templateVariables.year)

@@ -3,7 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{title}}</title>
+    <title>{{pageTitle}}</title>
+    <meta name="description" content="{{metaDescription}}">
+    <link rel="canonical" href="{{canonicalUrl}}">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ogTitle}}">
+    <meta property="og:description" content="{{metaDescription}}">
+    <meta property="og:url" content="{{canonicalUrl}}">
+    <meta property="og:type" content="{{ogType}}">
+    <meta property="og:image" content="{{ogImage}}">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="{{ogLocale}}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ogTitle}}">
+    <meta name="twitter:description" content="{{metaDescription}}">
+    <meta name="twitter:image" content="{{ogImage}}">
+
+    <!-- Hreflang for multilingual -->
+    {{hreflangTags}}
+
     <link rel="icon" type="image/x-icon" href="{{root}}static/img/logo.ico">
 
     <!-- Preconnects for external resources -->
