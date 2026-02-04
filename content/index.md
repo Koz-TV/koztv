@@ -4,7 +4,7 @@
 
   <div class="about_inner">
     <div class="lead-main">
-      <p>Hi! I'm Mike Koz – founder of <a href="https://chess.rodeo">chess.rodeo</a>.<br>Experimenting with software, hardware, and chess.<br>Not every move is winning.</p>
+      <p>Hi! I'm Mike Koz.<br>I teach people to build products with AI — no traditional coding required.<br>Vibe coding, fast MVPs, focus on what matters.</p>
       {{socialsWithSubscribers}}
     </div>
   </div>
