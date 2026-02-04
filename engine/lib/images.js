@@ -307,10 +307,6 @@ function createImageHtml(href, title, text, currentMdDir = '', context = 'defaul
         return base + ' loading="lazy" decoding="async" />';
     }
 
-    const withoutExt = resolvedHref.replace(/\.[^/.]+$/, '');
-    const avif = withoutExt + '.avif';
-    const webp = withoutExt + '.webp';
-
     // Получаем размеры для width/height атрибутов
     let dimAttrs = '';
     try {
@@ -324,21 +320,23 @@ function createImageHtml(href, title, text, currentMdDir = '', context = 'defaul
     // Определяем оптимальный размер на основе контекста
     const optimalSize = getOptimalImageSize(context);
 
-    // Создаем srcset и оптимальный src с абсолютными путями
-    const srcset = createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
+    // Создаем srcset для каждого формата и оптимальный src
+    const srcsetAvif = createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context, 'avif');
+    const srcsetWebp = createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context, 'webp');
     const sizes = createSizes(context);
     const optimalSrc = createOptimalSrcAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context);
 
     const loadingAttr = eager ? 'eager' : 'lazy';
     return `<picture>
-        <source type="image/avif" srcset="${avif}">
-        <source type="image/webp" srcset="${webp}">
-        <img loading="${loadingAttr}" decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcset}" sizes="${sizes}">
+        <source type="image/avif" srcset="${srcsetAvif}" sizes="${sizes}">
+        <source type="image/webp" srcset="${srcsetWebp}" sizes="${sizes}">
+        <img loading="${loadingAttr}" decoding="async" src="${optimalSrc}" alt="${alt}"${dimAttrs} srcset="${srcsetWebp}" sizes="${sizes}">
     </picture>`;
 }
 
 // Helper: Create srcset with absolute paths
-function createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context = 'default') {
+// format: 'webp' or 'avif'
+function createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalHref, context = 'default', format = 'webp') {
     const baseName = path.basename(resolvedHref).replace(/\.[^/.]+$/, '');
     const basePath = path.dirname(resolvedHref);
     let srcset = [];
@@ -359,7 +357,7 @@ function createSrcsetAbsolute(resolvedHref, optimalSize, currentMdDir, originalH
 
     for (const size of sizes) {
         if (!originalWidth || size <= originalWidth) {
-            srcset.push(`${basePath}/${baseName}-${size}.webp ${size}w`);
+            srcset.push(`${basePath}/${baseName}-${size}.${format} ${size}w`);
         }
     }
     return srcset.join(', ');
