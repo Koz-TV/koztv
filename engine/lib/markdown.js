@@ -227,7 +227,11 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     }
 
     // SEO variables
-    const siteName = 'Mike Koz';
+    const siteNames = {
+        en: 'Mike Koz',
+        ru: 'Миша Козлов'
+    };
+    const siteName = siteNames[currentLang] || siteNames.en;
     const siteUrl = config.cname ? `https://${config.cname}` : '';
     const plainTitle = metadata.title || '';
     const isHomePage = !plainTitle || metadata.bodyClass === 'home';
@@ -235,12 +239,27 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     // Page title: "Title | Site" or just "Site" for homepage
     const pageTitle = isHomePage ? siteName : `${plainTitle} | ${siteName}`;
 
-    // Meta description
+    // Meta description - from metadata, first paragraph, or default
     const defaultDescriptions = {
-        en: 'Mike Koz – founder of chess.rodeo. Experimenting with software, hardware, and chess.',
-        ru: 'Миша Коз – основатель chess.rodeo. Эксперименты с софтом, железом и шахматами.'
+        en: 'I build IT products solo, write about numbers, mistakes and technology.',
+        ru: 'Делаю IT-продукты в одиночку, пишу про цифры, ошибки и технологии.'
     };
-    const metaDescription = metadata.description || defaultDescriptions[currentLang] || defaultDescriptions.en;
+    let metaDescription = metadata.description;
+    if (!metaDescription && !isHomePage) {
+        // Extract first paragraph from content (strip HTML tags)
+        const firstParagraph = content.match(/<p>([^<]+)<\/p>/);
+        if (firstParagraph && firstParagraph[1]) {
+            metaDescription = firstParagraph[1]
+                .replace(/&[^;]+;/g, ' ')  // Remove HTML entities
+                .replace(/\s+/g, ' ')       // Normalize whitespace
+                .trim()
+                .slice(0, 160);             // Limit to 160 chars
+            if (metaDescription.length === 160) {
+                metaDescription = metaDescription.slice(0, 157) + '...';
+            }
+        }
+    }
+    metaDescription = metaDescription || defaultDescriptions[currentLang] || defaultDescriptions.en;
 
     // Canonical URL
     const slug = langOptions.slug || '';
@@ -264,8 +283,25 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     const ogLocales = { en: 'en_US', ru: 'ru_RU' };
     const ogLocale = ogLocales[currentLang] || 'en_US';
 
-    // OG image (default to logo, could be overridden by metadata.image)
-    const ogImage = metadata.image ? `${siteUrl}${metadata.image}` : `${siteUrl}/static/img/logo.webp`;
+    // OG image - from metadata, first image in content, or default logo
+    let ogImage = `${siteUrl}/static/img/logo.webp`;
+    if (metadata.image) {
+        ogImage = `${siteUrl}${metadata.image}`;
+    } else if (!isHomePage) {
+        // Try to find first image in content
+        const imgMatch = content.match(/<img[^>]+src="([^"]+)"/);
+        if (imgMatch && imgMatch[1]) {
+            const imgSrc = imgMatch[1];
+            // Make sure it's an absolute URL
+            if (imgSrc.startsWith('http')) {
+                ogImage = imgSrc;
+            } else if (imgSrc.startsWith('/')) {
+                ogImage = `${siteUrl}${imgSrc}`;
+            } else {
+                ogImage = `${siteUrl}/${imgSrc}`;
+            }
+        }
+    }
 
     // Hreflang tags
     let hreflangTags = '';
@@ -288,6 +324,50 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         hreflangTags = hreflangLinks.join('\n    ');
     }
 
+    // JSON-LD structured data
+    let jsonLd = '';
+    const personSchema = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Mike Koz",
+        "url": siteUrl,
+        "image": `${siteUrl}/static/img/logo.webp`,
+        "sameAs": [
+            "https://t.me/koztv",
+            "https://x.com/mixvlad",
+            "https://www.instagram.com/koz.tv/",
+            "https://www.youtube.com/@koz.tv"
+        ]
+    };
+
+    if (isHomePage) {
+        const websiteSchema = {
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            "name": siteName,
+            "url": siteUrl,
+            "author": personSchema
+        };
+        jsonLd = `<script type="application/ld+json">${JSON.stringify(websiteSchema)}</script>`;
+    } else if (langOptions.type === 'post') {
+        const articleSchema = {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": plainTitle,
+            "description": metaDescription,
+            "image": ogImage,
+            "url": canonicalUrl,
+            "datePublished": metadata.date ? (metadata.date instanceof Date ? metadata.date.toISOString() : metadata.date) : undefined,
+            "author": personSchema,
+            "publisher": {
+                "@type": "Person",
+                "name": "Mike Koz",
+                "url": siteUrl
+            }
+        };
+        jsonLd = `<script type="application/ld+json">${JSON.stringify(articleSchema)}</script>`;
+    }
+
     // Подготавливаем переменные для шаблона
     const nav = navTranslations[currentLang] || navTranslations.en;
     const templateVariables = {
@@ -300,6 +380,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         ogImage: ogImage,
         ogLocale: ogLocale,
         hreflangTags: hreflangTags,
+        jsonLd: jsonLd,
         date: dateStr,
         originalLink: originalLinkHtml,
         bodyClass: metadata.bodyClass || '',
@@ -352,6 +433,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{ogImage}}/g, templateVariables.ogImage)
         .replace(/{{ogLocale}}/g, templateVariables.ogLocale)
         .replace(/{{hreflangTags}}/g, templateVariables.hreflangTags)
+        .replace(/{{jsonLd}}/g, templateVariables.jsonLd)
         .replace(/{{date}}/g, templateVariables.date)
         .replace(/{{bodyClass}}/g, templateVariables.bodyClass)
         .replace(/{{year}}/g, templateVariables.year)
