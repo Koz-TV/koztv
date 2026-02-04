@@ -51,6 +51,9 @@ jobs:
       run: npm install --os=linux --cpu=x64 sharp
 
     - name: Build site
+      env:
+        GOOGLE_ANALYTICS: ${{ vars.GOOGLE_ANALYTICS }}
+        YANDEX_METRIKA: ${{ vars.YANDEX_METRIKA }}
       run: npm run build
 
     - name: Copy media files

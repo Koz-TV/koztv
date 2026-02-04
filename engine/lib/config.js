@@ -70,6 +70,14 @@ const externalConfig = loadExternalConfig();
 // Глубокое слияние дефолтной и внешней конфигурации
 const config = merge({}, defaultConfig, externalConfig);
 
+// Override from environment variables (for CI/CD)
+if (process.env.GOOGLE_ANALYTICS) {
+    config.googleAnalytics = process.env.GOOGLE_ANALYTICS;
+}
+if (process.env.YANDEX_METRIKA) {
+    config.yandexMetrika = process.env.YANDEX_METRIKA;
+}
+
 // Флаги командной строки
 const isDev = process.argv.includes('--watch');
 const shouldClean = process.argv.includes('--clean');

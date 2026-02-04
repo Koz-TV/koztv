@@ -1,6 +1,7 @@
 {
   "cname": "koz.tv",
   "googleAnalytics": null,
+  "yandexMetrika": null,
   "languages": ["en", "ru"],
   "images": {
     "sizes": [480, 960],
