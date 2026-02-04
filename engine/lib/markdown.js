@@ -21,17 +21,19 @@ const navTranslations = {
 
 // Настраиваем marked для обработки ссылок
 const renderer = new marked.Renderer();
-const originalLinkRenderer = renderer.link.bind(renderer);
 renderer.link = (href, title, text) => {
-    // Если ссылка начинается с /, убираем слеш
-    if (href.startsWith('/')) {
-        href = href.substring(1);
-    }
+    // Check if external link
+    const isExternal = href.startsWith('http://') || href.startsWith('https://');
+
     // Remove index.html at end of href
     if (href.endsWith('index.html')) {
         href = href.slice(0, -'index.html'.length);
     }
-    return originalLinkRenderer(href, title, text);
+
+    const titleAttr = title ? ` title="${title}"` : '';
+    const externalAttrs = isExternal ? ' target="_blank" rel="noopener"' : '';
+
+    return `<a href="${href}"${titleAttr}${externalAttrs}>${text}</a>`;
 };
 
 const originalImageRenderer = renderer.image.bind(renderer);
