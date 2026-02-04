@@ -13,6 +13,12 @@ const __dirname = dirname(__filename);
 
 let currentMdDir = '';
 
+// Navigation translations
+const navTranslations = {
+    en: { workWithMe: 'Work with me' },
+    ru: { workWithMe: 'Поработать' }
+};
+
 // Настраиваем marked для обработки ссылок
 const renderer = new marked.Renderer();
 const originalLinkRenderer = renderer.link.bind(renderer);
@@ -221,6 +227,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     }
 
     // Подготавливаем переменные для шаблона
+    const nav = navTranslations[currentLang] || navTranslations.en;
     const templateVariables = {
         title: displayTitle,
         date: dateStr,
@@ -233,6 +240,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         lang: currentLang,
         langPrefix: langPrefix,
         langSwitcher: langSwitcher,
+        navWorkWithMe: nav.workWithMe,
         googleAnalytics: config.googleAnalytics ?
             `<script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics}"></script>
     <script>
@@ -261,6 +269,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{lang}}/g, templateVariables.lang)
         .replace(/{{langPrefix}}/g, templateVariables.langPrefix)
         .replace(/{{langSwitcher}}/g, templateVariables.langSwitcher)
+        .replace(/{{navWorkWithMe}}/g, templateVariables.navWorkWithMe)
         .replace(/{{originalLink}}/g, templateVariables.originalLink || '')
         .replace('{{content}}', templateVariables.content);
 }
@@ -648,7 +657,17 @@ function generateLanguageSwitcher(currentLang, slug, type = 'post', folderSlug =
         const urlPrefix = isDefault ? '' : `/${lang}`;
         // Use per-language slug from translations map, or fallback to current slug
         const langSlug = translations[lang] || slug;
-        const href = pathSegment ? `${urlPrefix}/${pathSegment}/${langSlug}/` : `${urlPrefix}/`;
+        let href;
+        if (pathSegment) {
+            // posts/projects
+            href = `${urlPrefix}/${pathSegment}/${langSlug}/`;
+        } else if (slug) {
+            // standalone page (not homepage)
+            href = `${urlPrefix}/${slug}`;
+        } else {
+            // homepage
+            href = `${urlPrefix}/`;
+        }
         const name = langNames[lang] || lang.toUpperCase();
 
         if (isCurrent) {

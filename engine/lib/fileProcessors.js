@@ -85,6 +85,15 @@ const fileProcessors = {
             if (pathParts.length === 2 && languages.includes(pathParts[0]) && pathParts[1] === 'index.md') {
                 currentLang = pathParts[0];
             }
+            // Pattern: {lang}/{page}.md (non-default language standalone pages)
+            else if (pathParts.length === 2 && languages.includes(pathParts[0]) && pathParts[1].endsWith('.md')) {
+                currentLang = pathParts[0];
+                slug = pathParts[1].replace('.md', '');
+            }
+            // Pattern: {page}.md (default language standalone pages, not index)
+            else if (pathParts.length === 1 && pathParts[0].endsWith('.md') && pathParts[0] !== 'index.md') {
+                slug = pathParts[0].replace('.md', '');
+            }
             // Pattern: {lang}/{contentType}/slug/index.md (non-default language, after adjustment)
             else if (pathParts.length >= 3 && languages.includes(pathParts[0]) && contentTypes[pathParts[1]]) {
                 currentLang = pathParts[0];
