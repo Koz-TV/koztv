@@ -152,7 +152,7 @@ const fileProcessors = {
             html = html.split(orig).join(hashed);
         }
         if (isHomePage) {
-            html = html.replace(/{{socialsWithSubscribers}}/g, generateSocialIconsHtml(subscribers));
+            html = html.replace(/{{socialsWithSubscribers}}/g, generateSocialIconsHtml(subscribers, currentLang));
         }
         const htmlDest = destPath.replace(/\.md$/, '.html');
         await fs.ensureDir(path.dirname(htmlDest));
