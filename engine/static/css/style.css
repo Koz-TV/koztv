@@ -855,6 +855,7 @@ body.home nav.narrow {
 /* Original link to Telegram */
 /* original-link uses default link styles with animated underline */
 .original-link .tg-icon {
+  display: inline;
   width: 1em;
   height: 1em;
   color: #0088cc;
