@@ -4,7 +4,7 @@
   "yandexMetrika": null,
   "languages": ["en", "ru"],
   "images": {
-    "sizes": [480, 960],
-    "featuredSize": 1920
+    "sizes": [480, 960, 1600],
+    "featuredSize": 1600
   }
 }

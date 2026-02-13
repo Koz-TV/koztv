@@ -254,17 +254,16 @@ function createOptimalSrc(imagePath, imageName, optimalSize = 960, currentMdDir 
 // Создает sizes атрибут для responsive изображений
 // Учитывает контекст: grid (сетка проектов), featured (главный проект), content (статьи)
 function createSizes(context = 'default') {
-    // Для сетки проектов: 3 колонки на desktop, 2 на tablet, 1 на mobile
-    // Соответствует CSS: column-count: 3/2/1 в style.css
+    // Для сетки проектов: 4 колонки на wide, 3 на desktop, 2 на tablet, 1 на mobile
     if (context === 'grid') {
-        return '(max-width: 500px) 96vw, (max-width: 800px) 48vw, 31vw';
+        return '(max-width: 500px) 96vw, (max-width: 800px) 48vw, (max-width: 1200px) 31vw, 24vw';
     }
-    // Для featured проекта: полная ширина контента
+    // Для featured проекта: полная ширина до 1600px
     if (context === 'featured') {
-        return '(max-width: 500px) 96vw, (max-width: 960px) 96vw, 960px';
+        return '(max-width: 500px) 96vw, (max-width: 960px) 96vw, 1600px';
     }
-    // Для контента (статьи, посты): ширина контента (575px max)
-    return '(max-width: 480px) 96vw, (max-width: 960px) 90vw, 575px';
+    // Для контента (статьи, посты): изображения могут быть шире текста, до 1600px
+    return '(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px';
 }
 
 // Создает HTML для изображения с поддержкой WebP/AVIF и responsive sizes

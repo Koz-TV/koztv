@@ -79,6 +79,7 @@ p, h1, h2, h3 { overflow-wrap: break-word; }
   --font-smaller: calc(var(--cap-height) * 11 / 12 * var(--cap-ratio));
   --font-small: calc(var(--cap-height) * 10 / 12 * var(--cap-ratio));
   --width: 575px;
+  --max-media: 1600px;
   --border: 1.5px;
   --radius: calc(var(--cap-height) / 3);
   --gray-text: rgba(0, 0, 0, 0.7);
@@ -263,10 +264,10 @@ img.inline {
   line-height: 22.5px;
 }
 
-/* FIGURES */
+/* FIGURES & MEDIA - break out of content width up to --max-media */
 .content > figure {
   width: unset;
-  max-width: 96vw;
+  max-width: min(96vw, var(--max-media));
   margin: var(--gap) 0;
   display: flex;
   flex-direction: column;
@@ -274,11 +275,23 @@ img.inline {
   gap: var(--gap);
 }
 
+.content > picture {
+  width: unset;
+  max-width: min(96vw, var(--max-media));
+}
+
 .content > figure > img,
 .content > figure > video,
 .content > figure > iframe,
 .content > figure > a > img {
   border-radius: var(--radius);
+  max-height: 85svh;
+  width: auto;
+}
+
+.content > picture > img {
+  max-height: 85svh;
+  width: auto;
 }
 
 .content > figure > a {
@@ -504,6 +517,12 @@ button[disabled] {
 .projects-grid {
   column-count: 3;
   column-gap: var(--gap);
+}
+
+@media (min-width: 1200px) {
+  .projects-grid {
+    column-count: 4;
+  }
 }
 
 @media (max-width: 800px) {
@@ -763,7 +782,7 @@ body.home nav.narrow {
 /* Projects section */
 .projects-wrapper {
   width: 96vw;
-  max-width: 960px;
+  max-width: var(--max-media);
   margin: 0 auto;
   text-align: center;
   margin-top: 40px;
