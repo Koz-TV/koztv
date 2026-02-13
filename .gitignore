@@ -57,3 +57,4 @@ temp/
 qr-login.png
 .translated-posts.json
 .env
+Caddyfile.dev

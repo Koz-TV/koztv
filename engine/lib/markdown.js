@@ -3,7 +3,7 @@ import path from 'path';
 import { marked } from 'marked';
 import frontMatter from 'front-matter';
 import sizeOf from 'image-size';
-import { config } from './config.js';
+import { config, isDev } from './config.js';
 import { createImageHtml, createSrcset, createSizes } from './images.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -144,7 +144,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     if (dateStr instanceof Date) {
         dateStr = dateStr.toISOString().slice(0, 10);
     }
-    const devScript = '';
+    const devScript = isDev ? `document.write('<scr'+'ipt async src="/browser-sync/browser-sync-client.js"><\\/scr'+'ipt>')` : '';
     const yearStr = new Date().getFullYear();
 
     // Language support (languages, defaultLang, currentLang already defined above)
