@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adding Resharper Code Quality Analysis to TFS/VSTS | Mike Koz</title>
+    <meta name="description" content="This guide shows how to integrate Resharper code quality analysis into TFS/VSTS build pipeline.">
+    <link rel="canonical" href="https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Adding Resharper Code Quality Analysis to TFS/VSTS">
+    <meta property="og:description" content="This guide shows how to integrate Resharper code quality analysis into TFS/VSTS build pipeline.">
+    <meta property="og:url" content="https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Adding Resharper Code Quality Analysis to TFS/VSTS">
+    <meta name="twitter:description" content="This guide shows how to integrate Resharper code quality analysis into TFS/VSTS build pipeline.">
+    <meta name="twitter:image" content="https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Adding Resharper Code Quality Analysis to TFS/VSTS","description":"This guide shows how to integrate Resharper code quality analysis into TFS/VSTS build pipeline.","image":"https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp","url":"https://koz.tv/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/","datePublished":"2018-05-15T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/">Home</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#blog">Blog</a>
+        <a href="/work-with-me">Work with me</a>
+        <div class="lang-switcher"><span class="lang-current">EN</span> | <a href="/ru/posts/integratsiya-analiza-kachestva-koda-resharper-v-tfs-vsts/" class="lang-link">РУ</a></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>Adding Resharper Code Quality Analysis to TFS/VSTS</h1>
+                <div class="post-meta">
+                    <span class="date">2018-05-15</span>
+                </div>
+                <p>This guide shows how to integrate Resharper code quality analysis into TFS/VSTS build pipeline.</p>
+<h2>Setup Process</h2>
+<h3>Step 1: Create New Build Step</h3>
+<p>First, add a new build step to your TFS/VSTS pipeline.</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp" alt="Adding new build step in TFS" width="903" height="397" style="aspect-ratio:903/397" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image1-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<h3>Step 2: Configure Solution Name</h3>
+<p>Specify the solution name for analysis.</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image2-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image2-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image2-480.webp" alt="Configuring solution name parameter" width="903" height="397" style="aspect-ratio:903/397" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image2-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<h3>Step 3: Set Severity Level</h3>
+<p>Configure the severity level for code quality analysis.</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image3-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image3-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image3-480.webp" alt="Setting severity modification level" width="903" height="397" style="aspect-ratio:903/397" srcset="/posts/adding-resharper-code-quality-analysis-to-tfs-vsts/image3-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<div class="next-post"><strong>Next post:</strong> <a href="/posts/sql-query-for-todays-date-minus-year-month-day-or-minute/">SQL query for today’s date minus year, month, day or minute</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

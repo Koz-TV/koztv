@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add event log source in Windows | Mike Koz</title>
+    <meta name="description" content="Run powershell as Administrator and run following command:">
+    <link rel="canonical" href="https://koz.tv/posts/add-event-log-source-in-windows/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Add event log source in Windows">
+    <meta property="og:description" content="Run powershell as Administrator and run following command:">
+    <meta property="og:url" content="https://koz.tv/posts/add-event-log-source-in-windows/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/static/img/logo.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Add event log source in Windows">
+    <meta name="twitter:description" content="Run powershell as Administrator and run following command:">
+    <meta name="twitter:image" content="https://koz.tv/static/img/logo.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/add-event-log-source-in-windows/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/add-event-log-source-in-windows/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Add event log source in Windows","description":"Run powershell as Administrator and run following command:","image":"https://koz.tv/static/img/logo.webp","url":"https://koz.tv/posts/add-event-log-source-in-windows/","datePublished":"2017-03-28T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/">Home</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#blog">Blog</a>
+        <a href="/work-with-me">Work with me</a>
+        <div class="lang-switcher"><span class="lang-current">EN</span> | <a href="/ru/posts/dobavlenie-istochnika-zhurnala-sobytiy-v-windows/" class="lang-link">РУ</a></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>Add event log source in Windows</h1>
+                <div class="post-meta">
+                    <span class="date">2017-03-28</span>
+                </div>
+                <p>Run powershell as Administrator and run following command:</p>
+<pre><code class="language-powershell">New-EventLog -Source &quot;TestApi&quot; -LogName &quot;Application&quot;
+</code></pre>
+<div class="next-post"><strong>Next post:</strong> <a href="/posts/useful-telegram-bot-commands/">Useful telegram bot commands</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

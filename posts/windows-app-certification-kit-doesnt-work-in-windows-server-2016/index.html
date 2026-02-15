@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows App Certification Kit doesn’t work in Windows Server 2016 | Mike Koz</title>
+    <meta name="description" content="I develop Universal Windows Programs and found an interesting problem. You can’t use UI version of Windows App Certification Kit when your OS is Windows Serv...">
+    <link rel="canonical" href="https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Windows App Certification Kit doesn’t work in Windows Server 2016">
+    <meta property="og:description" content="I develop Universal Windows Programs and found an interesting problem. You can’t use UI version of Windows App Certification Kit when your OS is Windows Serv...">
+    <meta property="og:url" content="https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Windows App Certification Kit doesn’t work in Windows Server 2016">
+    <meta name="twitter:description" content="I develop Universal Windows Programs and found an interesting problem. You can’t use UI version of Windows App Certification Kit when your OS is Windows Serv...">
+    <meta name="twitter:image" content="https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Windows App Certification Kit doesn’t work in Windows Server 2016","description":"I develop Universal Windows Programs and found an interesting problem. You can’t use UI version of Windows App Certification Kit when your OS is Windows Serv...","image":"https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp","url":"https://koz.tv/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/","datePublished":"2016-11-08T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/">Home</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#blog">Blog</a>
+        <a href="/work-with-me">Work with me</a>
+        <div class="lang-switcher"><span class="lang-current">EN</span> | <a href="/ru/posts/windows-app-certification-kit-ne-rabotaet-v-windows-server-2/" class="lang-link">РУ</a></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>Windows App Certification Kit doesn’t work in Windows Server 2016</h1>
+                <div class="post-meta">
+                    <span class="date">2016-11-08</span>
+                </div>
+                <p>I develop Universal Windows Programs and found an interesting problem. You can’t use UI version of Windows App Certification Kit when your OS is Windows Server 2016.</p>
+<p>When I tried to test my program before send it to Windows Store, I got an error from Windows App Certification Kit:</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp" alt="screenshot-2016-11-09-21-13-03" width="480" height="163" style="aspect-ratio:480/163" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image1-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<p>But we can still use console app – <strong>appcert.exe</strong></p>
+<p>It’s a little bit harder then use UI version, we need to create some preparations:</p>
+<p>1. You need to instal prepared version of your app, it’s near the bundle file. Find file called Add-AppDevPackage.ps and run it with PowerShell.</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image2-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image2-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image2-480.webp" alt="screenshot-2016-11-09-21-28-57" width="733" height="245" style="aspect-ratio:733/245" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image2-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<p>2. Open PowerShell and run command:</p>
+<pre><code class="language-powershell">Get-AppxPackage &gt; packages.txt
+</code></pre>
+<p>3. Open file packages.txt and find your app, copy PackageFullName:</p>
+<p><picture>
+        <source type="image/avif" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image3-480.avif 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image3-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image3-480.webp" alt="screenshot-2016-11-09-21-41-10" width="769" height="148" style="aspect-ratio:769/148" srcset="/posts/windows-app-certification-kit-doesnt-work-in-windows-server-2016/image3-480.webp 480w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<p>4. Create file <strong>testPackage.bat</strong> and place this text inside:</p>
+<pre><code class="language-batch">del %~dp0\report.xml
+&quot;C:\Program Files (x86)\Windows Kits\10\App Certification Kit\appcert.exe&quot; reset
+&quot;C:\Program Files (x86)\Windows Kits\10\App Certification Kit\appcert.exe&quot; test -apptype windowsstoreapp -packagefullname &quot;Your app package full name&quot; -reportoutputpath %~dp0\report.xml
+pause
+</code></pre>
+<p>5. Do not forget to replace text “Your app package full name” with text from 3-rd step. Now you can run <strong>testPackage.bat</strong> file and when it’s done, check file <strong>report.xml</strong>. There you will found all information from Windows App Certification Kit about your app.</p>
+<div class="next-post"><strong>Next post:</strong> <a href="/posts/setup-webclient-timeout-in-powershell/">Setup WebClient timeout in PowerShell</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

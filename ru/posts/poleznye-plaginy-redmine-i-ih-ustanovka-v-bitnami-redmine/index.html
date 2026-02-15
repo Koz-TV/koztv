@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Полезные плагины Redmine и их установка в Bitnami Redmine | Миша Козлов</title>
+    <meta name="description" content="Список плагинов:">
+    <link rel="canonical" href="https://koz.tv/ru/posts/poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Полезные плагины Redmine и их установка в Bitnami Redmine">
+    <meta property="og:description" content="Список плагинов:">
+    <meta property="og:url" content="https://koz.tv/ru/posts/poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/static/img/logo.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Полезные плагины Redmine и их установка в Bitnami Redmine">
+    <meta name="twitter:description" content="Список плагинов:">
+    <meta name="twitter:image" content="https://koz.tv/static/img/logo.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Полезные плагины Redmine и их установка в Bitnami Redmine","description":"Список плагинов:","image":"https://koz.tv/static/img/logo.webp","url":"https://koz.tv/ru/posts/poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine/","datePublished":"2017-01-23T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/ru/">Главная</a>
+        <a href="/ru/#projects">Проекты</a>
+        <a href="/ru/#blog">Блог</a>
+        <a href="/ru/work-with-me">Поработать со мной</a>
+        <div class="lang-switcher"><a href="/posts/installing-plugins-in-redmine/" class="lang-link">EN</a> | <span class="lang-current">РУ</span></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>Полезные плагины Redmine и их установка в Bitnami Redmine</h1>
+                <div class="post-meta">
+                    <span class="date">2017-01-23</span>
+                </div>
+                <p>Список плагинов:</p>
+<p><a href="http://www.redmine.org/plugins/boolean_query" target="_blank" rel="noopener">http://www.redmine.org/plugins/boolean_query</a></p>
+<p>Для установки плагинов выполните следующие команды в папке htdocs redmine (у меня это &quot;/opt/bitnami/apps/redmine/htdocs&quot;):</p>
+<pre><code class="language-bash">bundle install
+</code></pre>
+<pre><code class="language-bash">bundle exec rake redmine:plugins:migrate RAILS_ENV=production
+</code></pre>
+<p>И перезапустите apache. Я использую следующую команду:</p>
+<pre><code class="language-bash">/opt/redmine-3.3.2-2/ctlscript.sh restart apache
+</code></pre>
+<div class="next-post"><strong>Следующий пост:</strong> <a href="/ru/posts/nastroyka-proksi-dlya-iis-prilozheniy-cherez-web-config/">Настройка прокси для IIS-приложений через web.config</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

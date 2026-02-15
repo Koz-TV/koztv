@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>chess.rodeo – платформа для анализа партий | Миша Козлов</title>
+    <meta name="description" content="Бесплатный анализатор шахматных партий, использующий Stockfish для профессионального разбора ваших игр.">
+    <link rel="canonical" href="https://koz.tv/ru/projects/chess-rodeo/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="chess.rodeo – платформа для анализа партий">
+    <meta property="og:description" content="Бесплатный анализатор шахматных партий, использующий Stockfish для профессионального разбора ваших игр.">
+    <meta property="og:url" content="https://koz.tv/ru/projects/chess-rodeo/">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://koz.tv/projects/chess-rodeo/image2-960.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="chess.rodeo – платформа для анализа партий">
+    <meta name="twitter:description" content="Бесплатный анализатор шахматных партий, использующий Stockfish для профессионального разбора ваших игр.">
+    <meta name="twitter:image" content="https://koz.tv/projects/chess-rodeo/image2-960.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/projects/chess-rodeo/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/projects/chess-rodeo/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    
+
+    <link rel="icon" type="image/x-icon" href="../../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/ru/">Главная</a>
+        <a href="/ru/#projects">Проекты</a>
+        <a href="/ru/#blog">Блог</a>
+        <a href="/ru/work-with-me">Поработать со мной</a>
+        <div class="lang-switcher"><a href="/projects/chess-rodeo/" class="lang-link">EN</a> | <span class="lang-current">РУ</span></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>chess.rodeo – платформа для анализа партий</h1>
+                <div class="post-meta">
+                    <span class="date">2024-01-15</span>
+                </div>
+                <p>Бесплатный анализатор шахматных партий, использующий Stockfish для профессионального разбора ваших игр.</p>
+<h2>Проблема</h2>
+<p>Анализ партий на Chess.com платный. Lichess хорош, но требует переключения между платформами. Мне нужен был инструмент, который работает с моими играми на Chess.com без лишних действий.</p>
+<h2>Решение</h2>
+<p><a href="https://chess.rodeo" target="_blank" rel="noopener">chess.rodeo</a> — вставьте имя пользователя, импортируйте партии, получите мгновенный анализ на движке Stockfish прямо в браузере.</p>
+<p><picture>
+        <source type="image/avif" srcset="/projects/chess-rodeo/image2-480.avif 480w, /projects/chess-rodeo/image2-960.avif 960w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/projects/chess-rodeo/image2-480.webp 480w, /projects/chess-rodeo/image2-960.webp 960w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/projects/chess-rodeo/image2-960.webp" alt="Простой интерфейс для импорта партий из Chess.com, Lichess или PGN-файлов" width="1280" height="720" style="aspect-ratio:1280/720" srcset="/projects/chess-rodeo/image2-480.webp 480w, /projects/chess-rodeo/image2-960.webp 960w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<h2>Ключевые возможности</h2>
+<p><strong>Классификация ходов</strong> — Каждый ход получает понятную оценку: блестящий (!!), отличный (!), хороший (✓), неточность (?!), ошибка (?), грубая ошибка (??). Никаких догадок.</p>
+<p><strong>Оценка точности</strong> — Процент точности в сравнении с идеальной игрой. Отслеживайте свой прогресс.</p>
+<p><strong>Распознавание дебютов</strong> — Автоматическое определение ECO-кода с названием дебюта. Узнавайте, что играете, без зубрёжки теории.</p>
+<p><picture>
+        <source type="image/avif" srcset="/projects/chess-rodeo/cover-480.avif 480w, /projects/chess-rodeo/cover-960.avif 960w, /projects/chess-rodeo/cover-1600.avif 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/projects/chess-rodeo/cover-480.webp 480w, /projects/chess-rodeo/cover-960.webp 960w, /projects/chess-rodeo/cover-1600.webp 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/projects/chess-rodeo/cover-960.webp" alt="Полный анализ партии с графиком оценки, списком ходов и разбивкой точности" width="3840" height="2160" style="aspect-ratio:3840/2160" srcset="/projects/chess-rodeo/cover-480.webp 480w, /projects/chess-rodeo/cover-960.webp 960w, /projects/chess-rodeo/cover-1600.webp 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<p><strong>График оценки</strong> — Визуальная шкала преимущества на протяжении всей партии. Найдите момент, когда всё пошло не так.</p>
+<p><strong>Лучшие ходы</strong> — Смотрите, что сыграл бы Stockfish в любой позиции. Учитесь у движка бесплатно.</p>
+<h2>Технические детали</h2>
+<ul>
+<li>Stockfish работает полностью в браузере через WebAssembly</li>
+<li>Без серверных вычислений = неограниченный бесплатный анализ</li>
+<li>Партии хранятся локально в IndexedDB</li>
+<li>Доступно расширение для Chrome для импорта в один клик</li>
+</ul>
+<h2>Результаты</h2>
+<p>Инструмент проанализировал миллионы партий. Пользователи от 1000 Elo до гроссмейстерского уровня используют его ежедневно. Избранные партии демонстрируют невероятные камбэки, достижения точности и марафонские сражения.</p>
+<p><a href="https://chess.rodeo" target="_blank" rel="noopener">Попробуйте бесплатно на chess.rodeo</a></p>
+
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

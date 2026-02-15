@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сброс пароля и выдача прав администратора для аккаунта Redmine | Миша Козлов</title>
+    <meta name="description" content="Сначала запустите mysql:">
+    <link rel="canonical" href="https://koz.tv/ru/posts/sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Сброс пароля и выдача прав администратора для аккаунта Redmine">
+    <meta property="og:description" content="Сначала запустите mysql:">
+    <meta property="og:url" content="https://koz.tv/ru/posts/sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="ru_RU">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Сброс пароля и выдача прав администратора для аккаунта Redmine">
+    <meta name="twitter:description" content="Сначала запустите mysql:">
+    <meta name="twitter:image" content="https://koz.tv/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"Сброс пароля и выдача прав администратора для аккаунта Redmine","description":"Сначала запустите mysql:","image":"https://koz.tv/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp","url":"https://koz.tv/ru/posts/sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re/","datePublished":"2017-11-09T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/ru/">Главная</a>
+        <a href="/ru/#projects">Проекты</a>
+        <a href="/ru/#blog">Блог</a>
+        <a href="/ru/work-with-me">Поработать со мной</a>
+        <div class="lang-switcher"><a href="/posts/reset-password-and-give-admin-rights-to-redmine-account/" class="lang-link">EN</a> | <span class="lang-current">РУ</span></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>Сброс пароля и выдача прав администратора для аккаунта Redmine</h1>
+                <div class="post-meta">
+                    <span class="date">2017-11-09</span>
+                </div>
+                <p>Сначала запустите mysql:</p>
+<pre><code class="language-sql">mysql --user=root --password=your_password
+</code></pre>
+<p>Параметры подключения можно найти в <strong>{папка redmine}/htdocs/config/database</strong></p>
+<p>Если учётные данные верны, вы увидите приветственное сообщение от консоли MySql:
+<picture>
+        <source type="image/avif" srcset="/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-480.avif 480w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.avif 960w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-1600.avif 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <source type="image/webp" srcset="/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-480.webp 480w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp 960w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-1600.webp 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+        <img loading="lazy" decoding="async" src="/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp" alt="" srcset="/posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-480.webp 480w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-960.webp 960w, /posts/reset-password-and-give-admin-rights-to-redmine-account/../../en/reset-password-and-give-admin-rights-to-redmine-account/image1-1600.webp 1600w" sizes="(max-width: 480px) 96vw, (max-width: 960px) 90vw, 1600px">
+    </picture></p>
+<p>Теперь нужно посмотреть все базы данных на текущем сервере mysql, выполните эту команду:</p>
+<pre><code class="language-sql">SHOW DATABASES;
+</code></pre>
+<p>Вы увидите что-то похожее на это:</p>
+<p>Нужно выбрать активную базу данных, выберите что-то со словом &quot;redmine&quot; в названии, у меня это &quot;bitnami_redmine&quot;, и выполните команду:</p>
+<pre><code class="language-sql">use your_database_name;
+</code></pre>
+<p>В моём случае это выглядело так:</p>
+<p>Чтобы посмотреть информацию о текущих пользователях, можно использовать эту команду:</p>
+<pre><code class="language-sql">select * from users;
+</code></pre>
+<p>Затем можно сбросить пароль и любое другое свойство для любого пользователя в этой таблице. Пример с пользователем admin:</p>
+<pre><code class="language-sql">update users set hashed_password = &#39;353e8061f2befecb6818ba0c034c632fb0bcae1b&#39;, salt =&#39;&#39; where login = &#39;admin&#39;;
+</code></pre>
+<p>Или можно сбросить пароль для обычного пользователя и одновременно дать ему права администратора:</p>
+<pre><code class="language-sql">update users set hashed_password = &#39;353e8061f2befecb6818ba0c034c632fb0bcae1b&#39;, salt =&#39;&#39;, admin = 1 where login = &#39;user&#39;;
+</code></pre>
+<p>Теперь можно войти в redmine с правами администратора, используя пароль: <strong>password</strong>
+для аккаунта, который вы использовали на предыдущем шаге.</p>
+<div class="next-post"><strong>Следующий пост:</strong> <a href="/ru/posts/razreshit-ssh-autentifikatsiyu-po-parolyu-na-udalyonnom-serv/">Разрешить SSH-аутентификацию по паролю на удалённом сервере</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 

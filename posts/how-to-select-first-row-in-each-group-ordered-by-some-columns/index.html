@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to select first row in each group ordered by some columns | Mike Koz</title>
+    <meta name="description" content="I’m just gonna show you an example how to select first row in each group of logins ordered by IsActive and Created columns, hope you will realise how it works.">
+    <link rel="canonical" href="https://koz.tv/posts/how-to-select-first-row-in-each-group-ordered-by-some-columns/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="How to select first row in each group ordered by some columns">
+    <meta property="og:description" content="I’m just gonna show you an example how to select first row in each group of logins ordered by IsActive and Created columns, hope you will realise how it works.">
+    <meta property="og:url" content="https://koz.tv/posts/how-to-select-first-row-in-each-group-ordered-by-some-columns/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/static/img/logo.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to select first row in each group ordered by some columns">
+    <meta name="twitter:description" content="I’m just gonna show you an example how to select first row in each group of logins ordered by IsActive and Created columns, hope you will realise how it works.">
+    <meta name="twitter:image" content="https://koz.tv/static/img/logo.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/how-to-select-first-row-in-each-group-ordered-by-some-columns/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/how-to-select-first-row-in-each-group-ordered-by-some-columns/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How to select first row in each group ordered by some columns","description":"I’m just gonna show you an example how to select first row in each group of logins ordered by IsActive and Created columns, hope you will realise how it works.","image":"https://koz.tv/static/img/logo.webp","url":"https://koz.tv/posts/how-to-select-first-row-in-each-group-ordered-by-some-columns/","datePublished":"2018-01-31T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../static/img/logo.ico">
+
+    <!-- Preload LCP images for faster rendering -->
+    
+
+    <!-- Preload critical fonts for faster LCP -->
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="../../static/fonts/ibm-plex-sans-700-latin.woff2" as="font" type="font/woff2" crossorigin>
+
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../static/css/style.975760c1.css" as="style">
+    <link rel="stylesheet" href="../../static/css/style.975760c1.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/">Home</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#blog">Blog</a>
+        <a href="/work-with-me">Work with me</a>
+        <div class="lang-switcher"><span class="lang-current">EN</span> | <a href="/ru/posts/kak-vybrat-pervuyu-stroku-v-kazhdoy-gruppe-s-sortirovkoy-po-/" class="lang-link">РУ</a></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>How to select first row in each group ordered by some columns</h1>
+                <div class="post-meta">
+                    <span class="date">2018-01-31</span>
+                </div>
+                <p>I’m just gonna show you an example how to select first row in each group of logins ordered by IsActive and Created columns, hope you will realise how it works.</p>
+<p>For example i have a table:</p>
+<p>Id | Login | IsActive | Created<br>1  | test1 |     1    | 2016-01-01<br>2  | test1 |     0    | 2015-05-21<br>3  | test2 |     0    | 2016-07-03<br>4  | test2 |     0    | 2017-01-22</p>
+<p>I want to select only one row per login, and this login should be active, if there’s no row where some login is active, I want to select the row that was created lately. So, in my case it’s row 1 and 4.</p>
+<p>To solve this task I created this script:</p>
+<pre><code class="language-sql">with cte as (
+  select *,
+  rank() over (partition by [Login] order by [Active] desc, Created desc) as [r]
+  from [User]
+)
+SELECT * FROM cte where [r] = 1
+</code></pre>
+<p>With <strong>rank() over</strong> I sorted rows in order I needed to and saved it in column [r]. Then I selected only first row in each group with this:<br><strong>SELECT * FROM cte where [r] = 1</strong></p>
+<p>If you need to to use it in join, just place block “with” on top, like this:</p>
+<pre><code class="language-sql">with cte as (
+  select *,
+  rank() over (partition by [Login] order by [Active] desc, Created desc) as [r]
+  from [User]
+)
+SELECT * FROM Employees emp
+LEFT JOIN (SELECT * FROM cte where [r] = 1) u on emp.[Login]=u.[Login]
+</code></pre>
+<div class="next-post"><strong>Next post:</strong> <a href="/posts/changing-the-folder-where-screenshots-placed-on-mac/">Changing the folder where screenshots placed on Mac</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 
