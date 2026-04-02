@@ -777,38 +777,21 @@ body.home nav.narrow {
   }
 }
 
-/* Social icons responsive fixes */
-@media (max-width: 600px) {
-  .social-icons {
-    gap: calc(var(--gap) * 0.6);
+/* Nav responsive */
+@media (max-width: 700px) {
+  .nav-photo {
+    width: 28px;
+    height: 28px;
+    margin-right: 0;
   }
 
-  .social-icons a {
-    font-size: 1.3em;
-  }
-
-  .social-icons .yt-subscribe-btn {
-    font-size: 0.75em;
-  }
-
-  /* Navigation adjustments for tablets */
   nav.narrow {
-    gap: calc(var(--gap) * 1.2);
-  }
-}
-
-@media (max-width: 500px) {
-  .social-icons {
-    gap: calc(var(--gap) * 0.5);
+    gap: calc(var(--gap) * 0.8);
   }
 
-  .social-icons a {
-    font-size: 1.2em;
-  }
-
-  .social-icons .yt-subscribe-btn {
-    font-size: 0.7em;
-    padding: 0.3em 0.5em;
+  nav .social-icons {
+    flex-wrap: nowrap;
+    white-space: nowrap;
   }
 }
 
@@ -875,7 +858,6 @@ body.home nav.narrow {
   
   nav.narrow a {
     font-size: 0.9em;
-    padding: 5px 8px;
   }
 }
 
