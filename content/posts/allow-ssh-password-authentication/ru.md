@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Разрешить SSH-аутентификацию по паролю на удалённом сервере"
 slug: "razreshit-ssh-autentifikatsiyu-po-parolyu-na-udalyonnom-serv"
 date: 2017-12-04

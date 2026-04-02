@@ -1,4 +1,5 @@
 ---
+tag: ai
 title: "About tools/models for vibe coding."
 date: 2026-01-28
 lang: en

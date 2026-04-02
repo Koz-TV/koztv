@@ -1,4 +1,5 @@
 ---
+tag: ai
 title: What is vibe coding and why it works
 date: 2026-02-04
 description: Vibe coding is building products with AI without knowing how to code. Here's how it works and how to get started.

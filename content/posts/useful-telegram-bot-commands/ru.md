@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Полезные команды для Telegram-ботов"
 slug: "poleznye-komandy-dlya-telegram-botov"
 date: 2017-03-28

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Начало месяца из даты в MS SQL (противоположность функции EOMONTH)"
 slug: "nachalo-mesyatsa-iz-daty-v-ms-sql-protivopolozhnost-funktsii"
 date: 2016-10-08

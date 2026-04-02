@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "I really did a lot."
 date: 2026-01-19
 lang: en

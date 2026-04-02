@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Полезные плагины Redmine и их установка в Bitnami Redmine"
 slug: "poleznye-plaginy-redmine-i-ih-ustanovka-v-bitnami-redmine"
 date: 2017-01-23

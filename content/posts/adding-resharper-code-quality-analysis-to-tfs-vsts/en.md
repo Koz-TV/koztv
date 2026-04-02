@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Adding Resharper Code Quality Analysis to TFS/VSTS"
 date: 2018-05-15
 ---

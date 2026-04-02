@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "About Dogfooding"
 date: 2026-02-02
 lang: en

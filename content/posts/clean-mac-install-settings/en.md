@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Configure clean MacBook"
 date: 2021-02-03
 ---

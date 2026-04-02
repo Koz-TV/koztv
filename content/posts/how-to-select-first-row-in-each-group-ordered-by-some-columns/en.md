@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "How to select first row in each group ordered by some columns"
 date: 2018-01-31
 ---

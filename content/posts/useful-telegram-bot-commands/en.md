@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Useful telegram bot commands"
 date: 2017-03-28
 ---

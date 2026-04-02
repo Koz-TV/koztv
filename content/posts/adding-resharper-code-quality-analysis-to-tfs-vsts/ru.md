@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Интеграция анализа качества кода Resharper в TFS/VSTS"
 slug: "integratsiya-analiza-kachestva-koda-resharper-v-tfs-vsts"
 date: 2018-05-15

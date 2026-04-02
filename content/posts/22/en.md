@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Update to the story about Cloudflare and chess.rodeo."
 date: 2026-03-09
 lang: en

@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "For small projects, Supabase is actually a pretty good solution."
 date: 2026-01-22
 lang: en

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Automate your work on Mac"
 date: 2019-12-10
 ---

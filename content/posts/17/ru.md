@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Пробили отметку в 1000 MAU с chess.rodeo 🥳"
 date: 2026-01-31
 lang: ru

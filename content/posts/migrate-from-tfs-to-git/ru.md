@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Миграция с TFS на Git"
 slug: "migratsiya-s-tfs-na-git"
 date: 2017-05-17

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "SQL query for today’s date minus year, month, day or minute"
 date: 2018-10-09
 ---

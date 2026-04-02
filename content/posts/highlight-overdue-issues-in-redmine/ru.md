@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Подсветка просроченных задач в Redmine"
 slug: "podsvetka-prosrochennyh-zadach-v-redmine"
 date: 2017-05-14

@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "Для маленьких проектов Supabase вообще-то неплохое решение."
 date: 2026-01-22
 lang: ru

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Добавление источника журнала событий в Windows"
 slug: "dobavlenie-istochnika-zhurnala-sobytiy-v-windows"
 date: 2017-03-28

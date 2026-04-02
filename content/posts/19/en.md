@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Continuation about the Chrome extension"
 date: 2026-02-04
 lang: en

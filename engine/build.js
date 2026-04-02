@@ -381,32 +381,48 @@ async function watch() {
         }
     });
     
-    // Наблюдаем за изменениями во всех шаблонах
-    const templatesDir = fs.existsSync('templates') ? 'templates' : path.join(__dirname, 'templates');
-    if (fs.existsSync(templatesDir)) {
-        fs.watch(templatesDir, async (eventType, filename) => {
-            if (filename && filename.endsWith('.html')) {
-                console.log(`Template ${filename} has been changed`);
-                safeBuild();
-            }
-        });
+    // Наблюдаем за изменениями во всех шаблонах (проект + движок)
+    const templatesDirs = ['templates', path.join(__dirname, 'templates')];
+    for (const dir of [...new Set(templatesDirs)]) {
+        if (fs.existsSync(dir)) {
+            fs.watch(dir, async (eventType, filename) => {
+                if (filename && filename.endsWith('.html')) {
+                    console.log(`Template ${filename} has been changed`);
+                    safeBuild();
+                }
+            });
+        }
     }
-    
-    // Наблюдаем за изменениями во всех CSS
-    const staticDir = fs.existsSync('static') ? 'static' : path.join(__dirname, 'static');
-    if (fs.existsSync(staticDir)) {
-        fs.watch(path.join(staticDir, 'css'), async (eventType, filename) => {
-            if (filename && filename.endsWith('.css')) {
-                console.log(`CSS ${filename} has been changed`);
-                safeBuild();
+
+    // Наблюдаем за изменениями в статике (проект + движок)
+    const staticDirs = ['static', path.join(__dirname, 'static')];
+    for (const dir of [...new Set(staticDirs)]) {
+        if (fs.existsSync(dir)) {
+            const cssDir = path.join(dir, 'css');
+            if (fs.existsSync(cssDir)) {
+                fs.watch(cssDir, async (eventType, filename) => {
+                    if (filename && filename.endsWith('.css')) {
+                        console.log(`CSS ${filename} has been changed (${dir})`);
+                        safeBuild();
+                    }
+                });
             }
-        });
-        
-        // Наблюдаем за изменениями в статических файлах (остальное)
-        fs.watch(staticDir, async (eventType, filename) => {
-            if (filename && !filename.endsWith('.css')) {
-                console.log(`Static file ${filename} has been changed`);
-                safeBuild();
+            fs.watch(dir, async (eventType, filename) => {
+                if (filename && !filename.endsWith('.css')) {
+                    console.log(`Static file ${filename} has been changed (${dir})`);
+                    safeBuild();
+                }
+            });
+        }
+    }
+
+    // Наблюдаем за изменениями в JS движка (engine/lib/)
+    const engineLibDir = path.join(__dirname, 'lib');
+    if (fs.existsSync(engineLibDir)) {
+        fs.watch(engineLibDir, async (eventType, filename) => {
+            if (filename && filename.endsWith('.js')) {
+                console.log(`Engine lib ${filename} has been changed — restart required`);
+                console.log('\x1b[33m⚠  Restart dev-local.sh to apply engine changes\x1b[0m');
             }
         });
     }

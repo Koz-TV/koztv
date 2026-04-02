@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Useful angular commands"
 date: 2019-05-01
 ---

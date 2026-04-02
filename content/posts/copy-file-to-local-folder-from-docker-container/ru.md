@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Копирование файла из Docker-контейнера в локальную папку"
 slug: "kopirovanie-fayla-iz-docker-konteynera-v-lokal-nuyu-papku"
 date: 2019-08-12

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Сравнение цен на виртуальные машины Azure в разных регионах"
 slug: "sravnenie-tsen-na-virtual-nye-mashiny-azure-v-raznyh-regiona"
 date: 2017-06-20

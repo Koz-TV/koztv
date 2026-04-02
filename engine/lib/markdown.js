@@ -3,8 +3,9 @@ import path from 'path';
 import { marked } from 'marked';
 import frontMatter from 'front-matter';
 import sizeOf from 'image-size';
-import { config, isDev } from './config.js';
+import { config, isDev, subscribers } from './config.js';
 import { createImageHtml, createSrcset, createSizes } from './images.js';
+import { generateSocialIconsHtml } from './socials.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 
@@ -416,6 +417,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         navProjects: nav.projects,
         navBlog: nav.blog,
         navWorkWithMe: nav.workWithMe,
+        navSocials: generateSocialIconsHtml(subscribers, currentLang),
         googleAnalytics: config.googleAnalytics ?
             `<script async src="https://www.googletagmanager.com/gtag/js?id=${config.googleAnalytics}"></script>
     <script>
@@ -472,6 +474,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{navProjects}}/g, templateVariables.navProjects)
         .replace(/{{navBlog}}/g, templateVariables.navBlog)
         .replace(/{{navWorkWithMe}}/g, templateVariables.navWorkWithMe)
+        .replace(/{{navSocials}}/g, templateVariables.navSocials)
         .replace(/{{lcpPreloads}}/g, templateVariables.lcpPreloads || '')
         .replace(/{{originalLink}}/g, templateVariables.originalLink || '')
         .replace('{{content}}', templateVariables.content)
@@ -482,6 +485,13 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
 // New structure: posts/{folderSlug}/{lang}.md
 // If lang is the default (first in config.languages), URLs have no prefix
 // Otherwise URLs are prefixed with /{lang}/
+// Tag display names per language
+const tagNames = {
+    en: { ai: 'AI & Tools', chess: 'chess.rodeo', dev: 'Dev Notes', thoughts: 'Thoughts' },
+    ru: { ai: 'AI и инструменты', chess: 'chess.rodeo', dev: 'Заметки разработчика', thoughts: 'Мысли' }
+};
+const tagOrder = ['ai', 'chess', 'thoughts', 'dev'];
+
 function generatePostsMarkdownList(lang = null) {
     const languages = config.languages || [];
     const defaultLang = languages[0] || null;
@@ -508,24 +518,52 @@ function generatePostsMarkdownList(lang = null) {
             const { attributes } = frontMatter(mdContent);
             const date = attributes.date || '1970-01-01';
             const title = attributes.title || folderSlug;
-            // Use frontmatter slug if provided, otherwise use folder slug
             const slug = attributes.slug || folderSlug;
-            return { slug, title, date };
+            const tag = attributes.tag || 'dev';
+            return { slug, title, date, tag };
         } catch {
             return null;
         }
     }).filter(Boolean);
 
-    metas.sort((a, b) => {
-        const ta = Date.parse(a.date);
-        const tb = Date.parse(b.date);
-        return tb - ta;
-    });
+    metas.sort((a, b) => Date.parse(b.date) - Date.parse(a.date));
 
-    // URL prefix for non-default languages
+    // Group by tag
+    const groups = {};
+    for (const m of metas) {
+        if (!groups[m.tag]) groups[m.tag] = [];
+        groups[m.tag].push(m);
+    }
+
     const urlPrefix = isDefaultLang ? '' : `/${lang}`;
+    const names = tagNames[currentLang] || tagNames.en;
 
-    return metas.map(m => `<li><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`).join('\n');
+    let html = '<div class="blog-grid">';
+    for (const tag of tagOrder) {
+        const posts = groups[tag];
+        if (!posts || posts.length === 0) continue;
+        html += '<div class="blog-group">';
+        html += `<h3>${names[tag] || tag}</h3>`;
+        html += '<ul>';
+        for (const m of posts) {
+            html += `<li><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`;
+        }
+        html += '</ul></div>';
+    }
+    // Any remaining tags not in tagOrder
+    for (const tag of Object.keys(groups)) {
+        if (tagOrder.includes(tag)) continue;
+        const posts = groups[tag];
+        html += '<div class="blog-group">';
+        html += `<h3>${names[tag] || tag}</h3>`;
+        html += '<ul>';
+        for (const m of posts) {
+            html += `<li><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`;
+        }
+        html += '</ul></div>';
+    }
+    html += '</div>';
+    return html;
 }
 
 // Cache for post metadata to avoid re-reading files

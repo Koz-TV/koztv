@@ -1,4 +1,5 @@
 ---
+tag: ai
 title: "I tested it, it really works pretty well, and they're giving away GLM 4.7 for free too (it's also a good model, I wrote about it above)."
 date: 2026-01-29
 lang: en

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Настройка таймаута WebClient в PowerShell"
 slug: "nastroyka-taymauta-webclient-v-powershell"
 date: 2016-11-09

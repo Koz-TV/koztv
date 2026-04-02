@@ -1,4 +1,5 @@
 ---
+tag: ai
 title: "Following up on the post, you can use kimi k2.5 for free for the next 6 days if you install their app or extension. https://kilo.ai/"
 date: 2026-01-28
 lang: en

@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Как выбрать первую строку в каждой группе с сортировкой по столбцам"
 slug: "kak-vybrat-pervuyu-stroku-v-kazhdoy-gruppe-s-sortirovkoy-po-"
 date: 2018-01-31

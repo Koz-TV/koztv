@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Полезные команды Angular"
 slug: "poleznye-komandy-angular"
 date: 2019-05-01

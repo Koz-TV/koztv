@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Изменение папки для скриншотов на Mac"
 slug: "izmenenie-papki-dlya-skrinshotov-na-mac"
 date: 2018-02-01

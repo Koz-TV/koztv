@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Windows App Certification Kit doesn’t work in Windows Server 2016"
 date: 2016-11-08
 ---

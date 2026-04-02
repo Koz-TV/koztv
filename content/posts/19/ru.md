@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Продолжение про расширение для Chrome"
 date: 2026-02-04
 lang: ru

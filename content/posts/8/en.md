@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "About how sometimes it's better to throw away and forget."
 date: 2026-01-22
 lang: en

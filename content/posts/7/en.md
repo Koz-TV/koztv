@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "I spent a week to realize that I don't need a trendy stack."
 date: 2026-01-20
 lang: en

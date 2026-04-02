@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Copy file to local folder from docker container"
 date: 2019-08-12
 ---

@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Do not register domains on Cloudflare if your audience is in Russia"
 date: 2026-02-24
 lang: en

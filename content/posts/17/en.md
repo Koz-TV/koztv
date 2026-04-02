@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Hit the 1000 MAU mark with chess.rodeo 🥳"
 date: 2026-01-31
 lang: en

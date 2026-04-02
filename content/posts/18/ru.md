@@ -1,4 +1,5 @@
 ---
+tag: chess
 title: "Про догфудинг"
 date: 2026-02-02
 lang: ru

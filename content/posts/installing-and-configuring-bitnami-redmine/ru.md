@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Установка и настройка Bitnami Redmine"
 slug: "ustanovka-i-nastroyka-bitnami-redmine"
 date: 2016-12-13

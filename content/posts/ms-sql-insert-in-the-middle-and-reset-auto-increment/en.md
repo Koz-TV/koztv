@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "MS SQL insert in the middle and reset auto increment"
 date: 2019-04-28
 ---

@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "The generated trailer looks better than 90% of the movies released in the last couple of years."
 date: 2026-01-24
 lang: en

@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "Picked up this beauty for 3000 rubles, I'll try to make something interesting out of it."
 date: 2026-01-24
 lang: en

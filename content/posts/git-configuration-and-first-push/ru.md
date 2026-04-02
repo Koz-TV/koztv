@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Настройка Git и первый push"
 slug: "nastroyka-git-i-pervyy-push"
 date: 2019-05-04

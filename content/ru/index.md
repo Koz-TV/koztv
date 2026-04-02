@@ -1,13 +1,5 @@
-<!-- Intro / Hero layout -->
-<div class="about">
-  <div class="about_photo" role="img" aria-label="Миша Коз"></div>
-
-  <div class="about_inner">
-    <div class="lead-main">
-      <p>Привет! Я Миша Козлов.<br>Учу делать продукты через AI — без классического программирования.<br>Современные инструменты, быстрые MVP, фокус на главном.</p>
-      {{socialsWithSubscribers}}
-    </div>
-  </div>
+<div class="bio">
+  <p>Привет! Я Миша Козлов. Учу делать продукты через AI — без классического программирования. Современные инструменты, быстрые MVP, фокус на главном.</p>
 </div>
 
 
@@ -24,12 +16,10 @@
 </div>
 
 
-## Посты и другие проекты
+## Посты
 
 <div id="blog">
-<ul>
 {{postsList}}
-</ul>
 </div>
 
 <script src="{{root}}static/js/project-videos.js" defer></script>

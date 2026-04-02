@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "MS SQL: вставка в середину таблицы и сброс автоинкремента"
 slug: "ms-sql-vstavka-v-seredinu-tablitsy-i-sbros-avtoinkrementa"
 date: 2019-04-28

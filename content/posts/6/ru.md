@@ -1,4 +1,5 @@
 ---
+tag: thoughts
 title: "Я действительно многое делал."
 date: 2026-01-19
 lang: ru

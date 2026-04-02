@@ -1,4 +1,5 @@
 ---
+tag: dev
 title: "Сброс пароля и выдача прав администратора для аккаунта Redmine"
 slug: "sbros-parolya-i-vydacha-prav-administratora-dlya-akkaunta-re"
 date: 2017-11-09
