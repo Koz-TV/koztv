@@ -17,33 +17,36 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     # Run on push OR on successful workflow_run
     if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
-    
+
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-      
+
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
-        node-version: '18'
+        node-version: '22'
         cache: 'npm'
-        
+
     - name: Restore image cache
       id: image-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: |
           docs
-        key: images-${{ hashFiles('content/**/*.{png,jpg,jpeg}', 'static/**/*.{png,jpg,jpeg}') }}-code-${{ hashFiles('build.js', 'lib/**/*.js', 'package.json') }}
+        key: images-${{ hashFiles('content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg') }}-code-${{ hashFiles('engine/build.js', 'engine/lib/**/*.js', 'package.json') }}
         restore-keys: |
-          images-${{ hashFiles('content/**/*.{png,jpg,jpeg}', 'static/**/*.{png,jpg,jpeg}') }}-
+          images-${{ hashFiles('content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg') }}-
           images-
-        
+
     - name: Install dependencies
       run: npm ci
 
@@ -63,9 +66,8 @@ jobs:
         fi
 
     - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: peaceiris/actions-gh-pages@v4
       with:
-        # Используем Personal Access Token если есть, иначе GITHUB_TOKEN
         github_token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}
         publish_dir: ./docs
         force_orphan: true
