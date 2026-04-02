@@ -111,14 +111,18 @@ async function generateImageSizes(sourcePath, destPath, forceRegenerate = false,
             break;
         }
     }
+    // Check if source is newer than dest (source changed, need to regenerate)
     if (!forceRegenerate && allExist) {
-        // Все файлы есть, добавляем их в список обработанных
-        if (addToProcessed) {
-            for (const t of targets) {
-                addToProcessed(t);
+        const srcMtime = fs.statSync(sourcePath).mtimeMs;
+        const destMtime = fs.statSync(destPath).mtimeMs;
+        if (srcMtime <= destMtime) {
+            if (addToProcessed) {
+                for (const t of targets) {
+                    addToProcessed(t);
+                }
             }
+            return;
         }
-        return;
     }
 
     // Копируем оригинал
