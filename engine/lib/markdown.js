@@ -437,10 +437,6 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         ym(${config.yandexMetrika}, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/${config.yandexMetrika}" style="position:absolute; left:-9999px;" alt="" /></div></noscript>` : '',
-        // LCP preloads for home page - profile photo and first project cover
-        lcpPreloads: (metadata.bodyClass === 'home') ?
-            `<link rel="preload" href="${rootPrefix}static/img/logo.webp" as="image" type="image/webp">
-    <link rel="preload" href="${rootPrefix}projects/chess-rodeo/cover-960.webp" as="image" type="image/webp">` : ''
     };
 
     // Читаем шаблон каждый раз заново
@@ -475,7 +471,6 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{navBlog}}/g, templateVariables.navBlog)
         .replace(/{{navWorkWithMe}}/g, templateVariables.navWorkWithMe)
         .replace(/{{navSocials}}/g, templateVariables.navSocials)
-        .replace(/{{lcpPreloads}}/g, templateVariables.lcpPreloads || '')
         .replace(/{{originalLink}}/g, templateVariables.originalLink || '')
         .replace('{{content}}', templateVariables.content)
         .replace(/{{root}}/g, templateVariables.root || '');

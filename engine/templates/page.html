@@ -31,12 +31,6 @@
     <link rel="icon" type="image/x-icon" href="{{root}}static/img/logo.ico">
 
     <!-- Preload LCP images for faster rendering -->
-    {{lcpPreloads}}
-
-    <!-- Preload critical fonts for faster LCP -->
-    <link rel="preload" href="{{root}}static/fonts/EuclidFlexRegular.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="preload" href="{{root}}static/fonts/EuclidFlexSemiBold.woff2" as="font" type="font/woff2" crossorigin>
-
     <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
     <link rel="preload" href="{{styleCss}}" as="style">
     <link rel="stylesheet" href="{{styleCss}}">
