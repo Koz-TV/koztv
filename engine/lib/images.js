@@ -111,11 +111,11 @@ async function generateImageSizes(sourcePath, destPath, forceRegenerate = false,
             break;
         }
     }
-    // Check if source is newer than dest (source changed, need to regenerate)
+    // Check if source unchanged (same size as cached copy in dest)
     if (!forceRegenerate && allExist) {
-        const srcMtime = fs.statSync(sourcePath).mtimeMs;
-        const destMtime = fs.statSync(destPath).mtimeMs;
-        if (srcMtime <= destMtime) {
+        const srcSize = fs.statSync(sourcePath).size;
+        const destSize = fs.statSync(destPath).size;
+        if (srcSize === destSize) {
             if (addToProcessed) {
                 for (const t of targets) {
                     addToProcessed(t);
