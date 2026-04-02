@@ -42,9 +42,9 @@ jobs:
       with:
         path: |
           docs
-        key: images-${{ hashFiles('content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg') }}-code-${{ hashFiles('engine/build.js', 'engine/lib/**/*.js', 'package.json') }}
+        key: images-${{ hashFiles('content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg') }}
         restore-keys: |
-          images-${{ hashFiles('content/**/*.png', 'content/**/*.jpg', 'content/**/*.jpeg') }}-
+          images-
           images-
 
     - name: Install dependencies
