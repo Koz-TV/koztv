@@ -1,6 +1,6 @@
 ---
-title: Vibe Coding Mentorship
-description: Learn to build products with AI — no traditional coding required. Personal mentorship on vibe coding, Cursor, Claude Code.
+title: Product Building Mentorship
+description: Learn to build products with AI and modern tools. Personal mentorship on Cursor, Claude Code, and more.
 ---
 
 I teach people to build real products with AI — no traditional coding required.
@@ -17,7 +17,7 @@ For anyone who wants to build products but doesn't want to spend years learning 
 
 ## What you'll learn
 
-**Vibe coding with AI:**
+**Building products with AI:**
 - Cursor, Claude Code, Replit Agent — which to choose and how to use
 - How to write prompts that make AI produce working code
 - How to debug and fix errors without knowing the language
@@ -43,7 +43,7 @@ One-time or ongoing — whatever works for you.
 ## Results
 
 - Designer learned to deploy to a server in one session
-- Product manager built her first SaaS through vibe coding
+- Product manager built her first SaaS with AI
 - [chess.rodeo](https://chess.rodeo) — my product, 1000+ monthly users
 
 ## Also available

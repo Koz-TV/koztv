@@ -4,7 +4,7 @@
 
   <div class="about_inner">
     <div class="lead-main">
-      <p>Привет! Я Миша Козлов.<br>Учу делать продукты через AI — без классического программирования.<br>Вайбкодинг, быстрые MVP, фокус на главном.</p>
+      <p>Привет! Я Миша Козлов.<br>Учу делать продукты через AI — без классического программирования.<br>Современные инструменты, быстрые MVP, фокус на главном.</p>
       {{socialsWithSubscribers}}
     </div>
   </div>
@@ -32,5 +32,5 @@
 </ul>
 </div>
 
-<script src="static/js/project-videos.js" defer></script>
+<script src="{{root}}static/js/project-videos.js" defer></script>
 

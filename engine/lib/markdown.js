@@ -19,6 +19,23 @@ const navTranslations = {
     ru: { home: 'Главная', projects: 'Проекты', blog: 'Блог', workWithMe: 'Поработать со мной' }
 };
 
+// Human-readable date formatting
+const monthNames = {
+    en: ['January','February','March','April','May','June','July','August','September','October','November','December'],
+    ru: ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября','ноября','декабря']
+};
+function formatDate(dateStr, lang) {
+    if (!dateStr) return '';
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return dateStr;
+    const months = monthNames[lang] || monthNames.en;
+    const day = d.getUTCDate();
+    const month = months[d.getUTCMonth()];
+    const year = d.getUTCFullYear();
+    if (lang === 'ru') return `${day} ${month} ${year}`;
+    return `${month} ${day}, ${year}`;
+}
+
 // Настраиваем marked для обработки ссылок
 const renderer = new marked.Renderer();
 renderer.link = (href, title, text) => {
@@ -144,6 +161,7 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
     if (dateStr instanceof Date) {
         dateStr = dateStr.toISOString().slice(0, 10);
     }
+    dateStr = formatDate(dateStr, currentLang);
     const devScript = isDev ? `document.write('<scr'+'ipt async src="/browser-sync/browser-sync-client.js"><\\/scr'+'ipt>')` : '';
     const yearStr = new Date().getFullYear();
 
@@ -447,7 +465,6 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{devReload}}/g, templateVariables.devReload)
         .replace(/{{googleAnalytics}}/g, templateVariables.googleAnalytics)
         .replace(/{{yandexMetrika}}/g, templateVariables.yandexMetrika)
-        .replace(/{{root}}/g, templateVariables.root || '')
         .replace(/{{lang}}/g, templateVariables.lang)
         .replace(/{{langPrefix}}/g, templateVariables.langPrefix)
         .replace(/{{langSwitcher}}/g, templateVariables.langSwitcher)
@@ -457,7 +474,8 @@ function convertMarkdownToHtml(markdown, metadata, mdDirRel, rootPrefix = '', la
         .replace(/{{navWorkWithMe}}/g, templateVariables.navWorkWithMe)
         .replace(/{{lcpPreloads}}/g, templateVariables.lcpPreloads || '')
         .replace(/{{originalLink}}/g, templateVariables.originalLink || '')
-        .replace('{{content}}', templateVariables.content);
+        .replace('{{content}}', templateVariables.content)
+        .replace(/{{root}}/g, templateVariables.root || '');
 }
 
 // Generate HTML list of posts sorted by date desc

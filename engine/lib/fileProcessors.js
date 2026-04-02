@@ -181,8 +181,16 @@ const fileProcessors = {
     '.jpeg': processImage
 };
 
-// Обработчик по умолчанию (копирование файла как есть)
+// Обработчик по умолчанию (копирование файла как есть, с проверкой mtime)
 const defaultProcessor = async (srcPath, destPath, relPath, entry, forceRegenerate, addToProcessed) => {
+    if (!forceRegenerate && fs.existsSync(destPath)) {
+        const srcStat = await fs.stat(srcPath);
+        const destStat = await fs.stat(destPath);
+        if (srcStat.size === destStat.size && srcStat.mtimeMs <= destStat.mtimeMs) {
+            if (addToProcessed) addToProcessed(destPath);
+            return;
+        }
+    }
     await fs.copy(srcPath, destPath);
     if (addToProcessed) addToProcessed(destPath);
 };

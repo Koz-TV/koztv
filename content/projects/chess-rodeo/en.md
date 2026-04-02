@@ -1,44 +1,50 @@
 ---
-title: "chess.rodeo – game review platform"
-date: 2024-01-15
+title: "chess.rodeo – free chess game analyzer"
+date: 2026-01-15
 featured: true
 ---
 
-A free chess game analyzer that uses Stockfish to give you GM-level insights into your games.
+18,000+ games analyzed. Zero paywalls. Powered by Stockfish.
 
-## The Problem
+![](screenshot-main.png "chess.rodeo homepage — import games from Chess.com, Lichess, or PGN files")
 
-Chess.com's game analysis is paywalled. Lichess analysis is good but requires switching platforms. I wanted something that works with my existing Chess.com games without friction.
+## Why
 
-## The Solution
+Game analysis on Chess.com and Lichess feels outdated. Clunky UI, slow processing, constant back-and-forth clicking to find your mistakes. I wanted something modern, fast, and actually pleasant to use — a tool that shows you what went wrong at a glance, not after 15 clicks.
 
-[chess.rodeo](https://chess.rodeo) — paste your username, import your games, get instant analysis powered by Stockfish running in your browser.
+So I built [chess.rodeo](https://chess.rodeo).
 
-![](image2.png "Clean interface to import games from Chess.com, Lichess, or PGN files")
+## How it works
 
-## Key Features
+Paste your Chess.com username, hit import, pick a game. Stockfish analyzes every move — no queue, no limits.
 
-**Move Classification** — Every move gets a clear label: brilliant (!!), great (!), good (✓), inaccuracy (?!), mistake (?), or blunder (??). No guessing what went wrong.
+![](screenshot-games-list.png "Import your games and pick any one to analyze")
 
-**Accuracy Scores** — See your accuracy percentage compared to perfect play. Track improvement over time.
+Every move gets classified:
 
-**Opening Recognition** — Automatic ECO code detection with opening names. Learn what you're playing without memorizing theory.
+- Brilliant (!!) and Great (!) — your best moments
+- Good (✓) — solid play
+- Inaccuracy (?!), Mistake (?), Blunder (??) — where things went wrong
 
-![](cover.png "Full game analysis with evaluation graph, move list, and accuracy breakdown")
+Plus accuracy scores, evaluation graph, and what Stockfish would have played instead.
 
-**Evaluation Graph** — Visual timeline of who's winning throughout the game. Spot the exact moment things went sideways.
+![](image1.png "Full analysis — board, eval graph, move classifications, and engine suggestions")
 
-**Best Moves** — See what Stockfish would play in any position. Learn from the engine without paying for premium.
+## What you get
 
-## Technical Details
+- **Move-by-move breakdown** — every move labeled with accuracy grade
+- **Evaluation graph** — see the exact moment you lost the advantage
+- **Accuracy scores** — compare both players against perfect play
+- **Opening recognition** — ECO codes and opening names, automatically
+- **Best move suggestions** — learn what Stockfish would do in your position
+- **Chrome extension** — analyze Chess.com games with one click, without leaving the site
 
-- Stockfish runs entirely in your browser via WebAssembly
-- No server-side computation = unlimited free analysis
-- Games stored locally in IndexedDB
-- Chrome extension available for one-click import
+![](screenshot-analysis.png "Detailed position analysis with best move arrows and evaluation")
 
-## Results
+## Under the hood
 
-The tool has analyzed millions of games. Users from 1000+ Elo to GM level use it daily. Featured games showcase incredible comebacks, accuracy achievements, and marathon battles.
+Analysis powered by Stockfish. Games stored in PostgreSQL.
 
-[Try it free at chess.rodeo](https://chess.rodeo)
+## Try it
+
+[chess.rodeo](https://chess.rodeo) — free, no account required.
