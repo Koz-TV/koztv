@@ -488,24 +488,55 @@ blockquote {
 }
 
 .blog-group h3 {
-  font-size: 1.333em;
-  font-weight: 600;
-  margin: 0 0 var(--gap) 0;
-  color: var(--text);
-  break-after: avoid;
+  padding: 5px 10px;
+  display: inline-block;
+  width: auto;
+  border-radius: 4px;
+}
+
+.blog-group li {
+  padding: 5px 10px;
 }
 
 .blog-group ul {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--gap) * 0.6);
+  border-radius: 4px;
+}
+
+.blog-group[data-tag="ai"] h3,
+.blog-group[data-tag="ai"] ul { background: rgba(99, 102, 241, 0.08); box-shadow: 0 0 6px 2px rgba(99, 102, 241, 0.04); }
+
+.blog-group[data-tag="chess"] h3,
+.blog-group[data-tag="chess"] ul { background: rgba(16, 185, 129, 0.08); box-shadow: 0 0 6px 2px rgba(16, 185, 129, 0.04); }
+
+.blog-group[data-tag="thoughts"] h3,
+.blog-group[data-tag="thoughts"] ul { background: rgba(251, 146, 60, 0.08); box-shadow: 0 0 6px 2px rgba(251, 146, 60, 0.04); }
+
+.blog-group[data-tag="dev"] h3,
+.blog-group[data-tag="dev"] ul { background: rgba(148, 163, 184, 0.1); box-shadow: 0 0 6px 2px rgba(148, 163, 184, 0.05); }
+
+
+.blog-group h3 {
+  font-size: 1.333em;
+  font-weight: 600;
+  margin: 0;
+  color: var(--text);
+  break-after: avoid;
+  display: inline-block;
+  width: auto;
+}
+
+.blog-group ul {
+  display: block;
   padding: 0;
   list-style: none;
 }
 
 .blog-group li {
-
   line-height: 1.35;
+  display: inline-block;
+  width: 100%;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
 @media (max-width: 700px) {

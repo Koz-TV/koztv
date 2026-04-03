@@ -537,7 +537,7 @@ function generatePostsMarkdownList(lang = null) {
     for (const tag of tagOrder) {
         const posts = groups[tag];
         if (!posts || posts.length === 0) continue;
-        html += '<div class="blog-group">';
+        html += `<div class="blog-group" data-tag="${tag}">`;
         html += `<h3>${names[tag] || tag}</h3>`;
         html += '<ul>';
         for (const m of posts) {
@@ -549,7 +549,7 @@ function generatePostsMarkdownList(lang = null) {
     for (const tag of Object.keys(groups)) {
         if (tagOrder.includes(tag)) continue;
         const posts = groups[tag];
-        html += '<div class="blog-group">';
+        html += `<div class="blog-group" data-tag="${tag}">`;
         html += `<h3>${names[tag] || tag}</h3>`;
         html += '<ul>';
         for (const m of posts) {
