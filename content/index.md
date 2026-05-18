@@ -1,5 +1,5 @@
 <div class="bio">
-  <p>Hi! I'm Mike Koz. I teach people to build products with AI — no traditional coding required. Modern tools, fast MVPs, focus on what matters.</p>
+  <p>Hi, I'm Mike Koz. I build products with AI faster than a team and cheaper than an agency. And I show you how to do the same.</p>
 </div>
 
 
