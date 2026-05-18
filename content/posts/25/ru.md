@@ -3,7 +3,7 @@ tag: dev
 title: "Как я настраивал хоткей чтобы убирать отступы при копировании из терминала"
 date: 2026-05-18
 lang: ru
-original_link: "https://t.me/koztv/23"
+original_link: "https://t.me/koztv/25"
 slug: "kak-ya-nastraival-hotkey-chtoby-ubirat-otstupy-pri-kopirovan"
 ---
 

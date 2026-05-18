@@ -3,7 +3,7 @@ tag: dev
 title: "How I set up a hotkey to strip indents when copying from the terminal"
 date: 2026-05-18
 lang: en
-original_link: "https://t.me/koztv/23"
+original_link: "https://t.me/koztv/25"
 slug: "how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal"
 translated_from: "ru"
 ---
