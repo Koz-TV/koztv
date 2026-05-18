@@ -1,7 +1,6 @@
 ---
 title: "chess.rodeo – free chess game analyzer"
 date: 2026-01-15
-featured: true
 ---
 
 18,000+ games analyzed. Zero paywalls. Powered by Stockfish.
