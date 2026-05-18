@@ -12,7 +12,8 @@ import {
     shouldRegenerateFile,
     generateImageSizes,
     processContentFile,
-    processFile
+    processFile,
+    generateSearchIndex
 } from './lib/index.js';
 import { fileURLToPath } from 'url';
 import { dirname } from 'path';
@@ -255,6 +256,9 @@ async function build() {
     } else {
         console.log('CNAME not configured, skipping CNAME file creation');
     }
+
+    // Generate blog search index JSON per language
+    await generateSearchIndex(processedFiles);
 
     // В конце очищаем файлы и папки, которые больше не должны существовать
     await cleanupRemovedFiles();

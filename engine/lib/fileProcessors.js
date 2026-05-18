@@ -6,7 +6,7 @@ import { config, assetManifest, subscribers } from './config.js';
 import { hashContent } from './hash.js';
 import { generateImageSizes } from './images.js';
 import frontMatter from 'front-matter';
-import { convertMarkdownToHtml, generatePostsMarkdownList, generateProjectsMarkup, generateLanguageSwitcher } from './markdown.js';
+import { convertMarkdownToHtml, generatePostsMarkdownList, generateBlogSearchUI, generateProjectsMarkup, generateLanguageSwitcher } from './markdown.js';
 import { generateSocialIconsHtml } from './socials.js';
 
 // Общая функция для обработки изображений
@@ -120,6 +120,7 @@ const fileProcessors = {
             const proj = generateProjectsMarkup(currentLang);
             mdBody = mdBody
                 .replace(/{{postsList}}/g, generatePostsMarkdownList(currentLang))
+                .replace(/{{blogSearch}}/g, generateBlogSearchUI(currentLang))
                 .replace(/{{projectsFeatured}}/g, proj.featured)
                 .replace(/{{projectsGrid}}/g, proj.grid);
         }

@@ -7,6 +7,7 @@ export * from './fileProcessors.js';
 export * from './markdown.js';
 export * from './socials.js';
 export * from './redirects.js';
+export { generateSearchIndex } from './searchIndex.js';
 
 // Re-export language helpers explicitly
 export { getPostLanguages, generateLanguageSwitcher } from './markdown.js'; 

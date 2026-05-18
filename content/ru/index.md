@@ -16,11 +16,15 @@
 </div>
 
 
-## Посты
+<div class="blog-header">
+<h2>Посты</h2>
+{{blogSearch}}
+</div>
 
 <div id="blog">
 {{postsList}}
 </div>
 
 <script src="{{root}}static/js/project-videos.js" defer></script>
+<script src="{{root}}static/js/blog-search.js" defer></script>
 

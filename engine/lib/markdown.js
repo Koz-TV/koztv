@@ -533,6 +533,12 @@ function generatePostsMarkdownList(lang = null) {
     const urlPrefix = isDefaultLang ? '' : `/${lang}`;
     const names = tagNames[currentLang] || tagNames.en;
 
+    const escapeAttr = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+    const renderItem = (m) => {
+        const titleLower = escapeAttr(m.title.toLowerCase());
+        return `<li data-slug="${escapeAttr(m.slug)}" data-tag="${escapeAttr(m.tag)}" data-title="${titleLower}"><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`;
+    };
+
     let html = '<div class="blog-grid">';
     for (const tag of tagOrder) {
         const posts = groups[tag];
@@ -540,9 +546,7 @@ function generatePostsMarkdownList(lang = null) {
         html += `<div class="blog-group" data-tag="${tag}">`;
         html += `<h3>${names[tag] || tag}</h3>`;
         html += '<ul>';
-        for (const m of posts) {
-            html += `<li><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`;
-        }
+        for (const m of posts) html += renderItem(m);
         html += '</ul></div>';
     }
     // Any remaining tags not in tagOrder
@@ -552,13 +556,30 @@ function generatePostsMarkdownList(lang = null) {
         html += `<div class="blog-group" data-tag="${tag}">`;
         html += `<h3>${names[tag] || tag}</h3>`;
         html += '<ul>';
-        for (const m of posts) {
-            html += `<li><a href="${urlPrefix}/posts/${m.slug}/">${m.title}</a></li>`;
-        }
+        for (const m of posts) html += renderItem(m);
         html += '</ul></div>';
     }
     html += '</div>';
     return html;
+}
+
+const blogSearchStrings = {
+    en: { placeholder: 'Search posts…', toggle: 'Search', empty: 'Nothing matches.' },
+    ru: { placeholder: 'Поиск по постам…', toggle: 'Поиск', empty: 'Ничего не нашлось.' }
+};
+
+function generateBlogSearchUI(lang = null) {
+    const languages = config.languages || [];
+    const currentLang = lang || languages[0] || 'en';
+    const strings = blogSearchStrings[currentLang] || blogSearchStrings.en;
+
+    return `<div class="blog-search" data-lang="${currentLang}">
+  <button type="button" class="blog-search-toggle" aria-label="${strings.toggle}" aria-expanded="false">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+  </button>
+  <input type="search" id="blog-search-input" class="blog-search-input" placeholder="${strings.placeholder}" autocomplete="off" spellcheck="false" tabindex="-1">
+</div>
+<div class="blog-search-empty" hidden>${strings.empty}</div>`;
 }
 
 // Cache for post metadata to avoid re-reading files
@@ -1003,9 +1024,10 @@ function generateProjectsMarkup(lang = null) {
 export {
     convertMarkdownToHtml,
     generatePostsMarkdownList,
+    generateBlogSearchUI,
     generateProjectsMarkup,
     getPostLanguages,
     getPostTranslations,
     getProjectTranslations,
     generateLanguageSwitcher
-}; 
+};
