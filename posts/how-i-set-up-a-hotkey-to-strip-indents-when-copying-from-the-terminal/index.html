@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How I set up a hotkey to strip indents when copying from the terminal | Mike Koz</title>
+    <meta name="description" content="I work in Claude Code through Wave Terminal. Noticed a small annoyance: whenever I copy an assistant reply and paste it somewhere, every line gets two extra ...">
+    <link rel="canonical" href="https://koz.tv/posts/how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="How I set up a hotkey to strip indents when copying from the terminal">
+    <meta property="og:description" content="I work in Claude Code through Wave Terminal. Noticed a small annoyance: whenever I copy an assistant reply and paste it somewhere, every line gets two extra ...">
+    <meta property="og:url" content="https://koz.tv/posts/how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal/">
+    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://koz.tv/static/img/logo.webp">
+    <meta property="og:site_name" content="Mike Koz">
+    <meta property="og:locale" content="en_US">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How I set up a hotkey to strip indents when copying from the terminal">
+    <meta name="twitter:description" content="I work in Claude Code through Wave Terminal. Noticed a small annoyance: whenever I copy an assistant reply and paste it somewhere, every line gets two extra ...">
+    <meta name="twitter:image" content="https://koz.tv/static/img/logo.webp">
+
+    <!-- Hreflang for multilingual -->
+    <link rel="alternate" hreflang="en" href="https://koz.tv/posts/how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal/">
+    <link rel="alternate" hreflang="ru" href="https://koz.tv/ru/posts/how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal/">
+    <link rel="alternate" hreflang="x-default" href="https://koz.tv/">
+
+    <!-- JSON-LD structured data -->
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"How I set up a hotkey to strip indents when copying from the terminal","description":"I work in Claude Code through Wave Terminal. Noticed a small annoyance: whenever I copy an assistant reply and paste it somewhere, every line gets two extra ...","image":"https://koz.tv/static/img/logo.webp","url":"https://koz.tv/posts/how-i-set-up-a-hotkey-to-strip-indents-when-copying-from-the-terminal/","datePublished":"2026-05-18T00:00:00.000Z","author":{"@context":"https://schema.org","@type":"Person","name":"Mike Koz","url":"https://koz.tv","image":"https://koz.tv/static/img/logo.webp","sameAs":["https://t.me/koztv","https://x.com/mixvlad","https://www.instagram.com/koz.tv/","https://www.youtube.com/@koz.tv"]},"publisher":{"@type":"Person","name":"Mike Koz","url":"https://koz.tv"}}</script>
+
+    <link rel="icon" type="image/x-icon" href="../../static/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../../static/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../../static/img/apple-touch-icon.png">
+
+    <!-- Preload LCP images for faster rendering -->
+    <!-- Site styles: preload for early fetch, standard link to avoid FOUC -->
+    <link rel="preload" href="../../static/css/style.91bbb3f0.css" as="style">
+    <link rel="stylesheet" href="../../static/css/style.91bbb3f0.css">
+
+    <script>
+        
+    </script>
+
+    <!-- Inline image loader script early to wrap images before they start downloading -->
+    <script src="../../static/js/img-loader.53beda4c.js" defer></script>
+</head>
+<body class="">
+    <header>
+    <nav class="narrow">
+        <a href="/" class="nav-photo" aria-label="Home"></a>
+        <a href="/">Home</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#blog">Blog</a>
+        <a href="/work-with-me">Work with me</a>
+        <div class="social-icons">
+    <a href="https://www.youtube.com/channel/UCBFYIbjqFFhFZBvE1JmvpEg?sub_confirmation=1" class="yt-subscribe-btn" title="YouTube" aria-label="Subscribe YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 576 512" fill="currentColor" aria-hidden="true"><path d="M549.655 124.083c-6.281-23.65-24.787-42.276-48.284-48.597C458.781 64 288 64 288 64S117.22 64 74.629 75.486c-23.497 6.322-42.003 24.947-48.284 48.597-11.412 42.867-11.412 132.305-11.412 132.305s0 89.438 11.412 132.305c6.281 23.65 24.787 41.5 48.284 47.821C117.22 448 288 448 288 448s170.78 0 213.371-11.486c23.497-6.321 42.003-24.171 48.284-47.821 11.412-42.867 11.412-132.305 11.412-132.305s0-89.438-11.412-132.305zm-317.51 213.508V175.185l142.739 81.205-142.739 81.201z"/></svg> <span>Subscribe</span></a>
+    <a href="https://x.com/mixvlad" title="X" aria-label="X" target="_blank" rel="noopener"><svg viewBox="0 0 512 512" fill="currentColor" aria-hidden="true"><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg></a>
+    <a href="https://www.instagram.com/koz.tv/" title="Instagram" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg></a>
+    <a href="https://www.threads.com/@koz.tv" title="Threads" aria-label="Threads" target="_blank" rel="noopener"><svg viewBox="0 0 448 512" fill="currentColor" aria-hidden="true"><path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3 .5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4c-29.2-35.8-73-54.2-130.5-54.6c-57 .5-100.1 18.8-128.2 54.4C72.1 146.1 58.5 194.3 58 256c.5 61.7 14.1 109.9 40.3 143.3c28 35.6 71.2 53.9 128.2 54.4c51.4-.4 85.4-12.6 113.7-40.9c32.3-32.2 31.7-71.8 21.4-95.9c-6.1-14.2-17.1-26-31.9-34.9c-3.7 26.9-11.8 48.3-24.7 64.8c-17.1 21.8-41.4 33.6-72.7 35.3c-23.6 1.3-46.3-4.4-63.9-16c-20.8-13.8-33-34.8-34.3-59.3c-2.5-48.3 35.7-83 95.2-86.4c21.1-1.2 40.9-.3 59.2 2.8c-2.4-14.8-7.3-26.6-14.6-35.2c-10-11.7-25.6-17.7-46.2-17.8H227c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1h.8c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3c25.6-1.4 54.6-11.4 59.5-73.2c-13.2-2.9-27.8-4.4-43.4-4.4c-4.8 0-9.6 .1-14.4 .4c-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg></a>
+  </div>
+        <span class="nav-spacer"></span>
+        <div class="lang-switcher"><span class="lang-current">EN</span> | <a href="/ru/posts/kak-ya-nastraival-hotkey-chtoby-ubirat-otstupy-pri-kopirovan/" class="lang-link">РУ</a></div>
+    </nav>
+</header>
+
+    <main>
+        <article>
+            <div class="content">
+                <h1>How I set up a hotkey to strip indents when copying from the terminal</h1>
+                <div class="post-meta">
+                    <span class="date">May 18, 2026</span> · <span class="original-link"><a href="https://t.me/koztv/25" target="_blank" rel="noopener">View in <svg class="tg-icon" viewBox="0 0 496 512" fill="currentColor" aria-hidden="true"><path d="M248 8C111 8 0 119 0 256S111 504 248 504 496 393 496 256 385 8 248 8zM363 176.7c-3.7 39.2-19.9 134.4-28.1 178.3-3.5 18.6-10.3 24.8-16.9 25.4-14.4 1.3-25.3-9.5-39.3-18.7-21.8-14.3-34.2-23.2-55.3-37.2-24.5-16.1-8.6-25 5.3-39.5 3.7-3.8 67.1-61.5 68.3-66.7 .2-.7 .3-3.1-1.2-4.4s-3.6-.8-5.1-.5q-3.3 .7-104.6 69.1-14.8 10.2-26.9 9.9c-8.9-.2-25.9-5-38.6-9.1-15.5-5-27.9-7.7-26.8-16.3q.8-6.7 18.5-13.7 108.4-47.2 144.6-62.3c68.9-28.6 83.2-33.6 92.5-33.8 2.1 0 6.6 .5 9.6 2.9a10.5 10.5 0 0 1 3.5 6.7A43.8 43.8 0 0 1 363 176.7z"/></svg></a></span>
+                </div>
+                <p>I work in Claude Code through Wave Terminal. Noticed a small annoyance: whenever I copy an assistant reply and paste it somewhere, every line gets two extra spaces at the start.</p>
+<p>At first I thought the assistant itself was inserting trailing spaces. Asked it not to. Didn&#39;t help. I started digging — turns out it&#39;s the renderer: the terminal indents the assistant&#39;s text by two spaces to visually separate it from my input. When you copy, that indent honestly lands in the clipboard.</p>
+<p>iTerm2 has an option for this called &quot;Trim trailing whitespace when copying&quot;. Wave doesn&#39;t. Claude Code&#39;s settings don&#39;t have anything similar either.</p>
+<p>I decided to bind clipboard cleanup to a hotkey via Hammerspoon. Simple idea: hit Cmd+Shift+V, a Lua script grabs the clipboard, strips the two leading spaces from every line, puts it back, and emulates a regular Cmd+V.</p>
+<p>Sounds like ten lines of code. In practice I collected a set of pitfalls.</p>
+<p><strong>Pitfall 1.</strong> The Hammerspoon hotkey API registers a combo by character. When I wrote <code>hs.hotkey.bind({&quot;cmd&quot;,&quot;shift&quot;}, &quot;v&quot;, ...)</code>, it looked at the active keyboard layout. At the moment Hammerspoon loaded my layout was Russian — and on the Russian layout the physical V key produces the letter &quot;м&quot;. The hotkey registered as ⌘⇧м and worked only when Russian was active. Switched to English — nothing happens.</p>
+<p><strong>Pitfall 2.</strong> I tried passing a raw keycode as a number — 9 is the physical V key on any layout. <code>bindSpec</code> accepts a number but silently ignores it and still looks for a string. <code>bind</code> accepts the number, but it didn&#39;t fire on a physical keypress — apparently something at the Carbon Events level breaks with a non-Latin layout.</p>
+<p>In the end I threw out the hotkey API entirely and moved to <code>hs.eventtap.new</code> — that&#39;s interception at the CGEventTap level, below applications and below layouts. I get a raw keyDown event and check modifiers and keycode 9 manually. Works everywhere.</p>
+<p><strong>Pitfall 3.</strong> The most annoying one. After all the fixes I restart Hammerspoon, the config loads, <code>hs.accessibilityState()</code> returns true. But eventtap doesn&#39;t receive a single event. I physically press Cmd+Shift+V — logs are empty. I send it programmatically via <code>hs.eventtap.event.newKeyEvent(...):post()</code> — it fires.</p>
+<p>Went to System Settings → Privacy &amp; Security → Accessibility. Hammerspoon was there, toggle on. I flipped it OFF, waited two seconds, flipped it back ON. Restarted Hammerspoon. Worked.</p>
+<p>Looks like after <code>pkill</code> macOS cached the permission in a &quot;kinda granted but not really&quot; state. The re-toggle reissues the actual permission for the low-level event tap. <code>accessibilityState()</code> was lying the whole time.</p>
+<p><strong>Bottom line:</strong> Cmd+Shift+V now cleans the clipboard before pasting. Regular Cmd+V still works the same. If this ever breaks again — I know what to check first.</p>
+<p>Final <code>~/.hammerspoon/init.lua</code>:</p>
+<pre><code class="language-lua">local function cleanText(s)
+  if s == nil or s == &quot;&quot; then return s end
+  s = s:gsub(&quot;^  &quot;, &quot;&quot;)           -- leading 2 spaces at the very start
+  s = s:gsub(&quot;\n  &quot;, &quot;\n&quot;)        -- leading 2 spaces after every newline
+  s = s:gsub(&quot;[ \t]+\n&quot;, &quot;\n&quot;)    -- trailing whitespace before newlines
+  s = s:gsub(&quot;[ \t]+{{content}}quot;, &quot;&quot;)       -- trailing whitespace at the very end
+  return s
+end
+
+local tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
+  local flags = event:getFlags()
+  -- keycode 9 = physical V key on US ANSI, independent of layout
+  if flags.cmd and flags.shift and not flags.alt and not flags.ctrl
+     and event:getKeyCode() == 9 then
+    local raw = hs.pasteboard.getContents()
+    if raw == nil or raw == &quot;&quot; then return true end
+
+    hs.pasteboard.setContents(cleanText(raw))
+
+    -- post a synthetic Cmd+V to the focused app
+    hs.timer.doAfter(0.02, function()
+      hs.eventtap.event.newKeyEvent({&quot;cmd&quot;}, 9, true):post()
+      hs.timer.usleep(20000)
+      hs.eventtap.event.newKeyEvent({&quot;cmd&quot;}, 9, false):post()
+    end)
+    -- restore the original clipboard after the paste completes
+    hs.timer.doAfter(0.6, function()
+      hs.pasteboard.setContents(raw)
+    end)
+
+    return true  -- consume the original Cmd+Shift+V so the app doesn&#39;t also see it
+  end
+  return false
+end)
+tap:start()
+
+-- auto-reload on config edit
+hs.pathwatcher.new(os.getenv(&quot;HOME&quot;) .. &quot;/.hammerspoon/&quot;, function(files)
+  for _, f in ipairs(files) do
+    if f:match(&quot;%.lua{{content}}quot;) then hs.reload(); return end
+  end
+end):start()
+
+hs.alert.show(&quot;Hammerspoon: Cmd+Shift+V for clean paste&quot;)
+</code></pre>
+<div class="next-post"><strong>Next post:</strong> <a href="/posts/we-along-with-noldesignartemov-decided-to-launch-a-channel-w/">We, along with nol_design_artemov, decided to launch a channel where we explore cool products and the people who make them.</a></div>
+            </div>
+        </article>
+    </main>
+
+    <footer class="narrow">
+    <p>© 2014 – 2026  Mike Koz<br><a href="mailto:m@koz.tv">m@koz.tv</a> </p>
+</footer> 
+
+
+    <!-- Analytics deferred to not block rendering -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XB3YH3ZZXT"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XB3YH3ZZXT');
+    </script>
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+        (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+        ym(37275530, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true });
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/37275530" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+</body>
+</html> 
