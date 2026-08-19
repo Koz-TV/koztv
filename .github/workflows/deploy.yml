@@ -22,21 +22,69 @@ env:
 
 jobs:
   build-and-deploy:
-    runs-on: ubuntu-latest
+    # homenas, like update-blog.yml — see the note on `runs-on` there.
+    runs-on: self-hosted
+    # Six hours is the default when a job does not say. See update-blog.yml.
+    timeout-minutes: 30
     # Run on push OR on successful workflow_run
     if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
 
     steps:
+    # The daily blog cron fires this workflow whether or not it found a post,
+    # because `workflow_run` reports that the run COMPLETED, not that it changed
+    # anything. So most nights this rebuilt the whole site and force-pushed an
+    # identical `gh-pages` — which in turn woke GitHub's own
+    # "pages build and deployment" workflow, a second billed run for the same
+    # nothing.
+    #
+    # `workflow_run.head_sha` is the commit the blog job STARTED from: if it
+    # pushed, main has moved past it; if it did not, main still points at
+    # exactly that commit. One API read, no stored state.
+    #
+    # DEFAULTS TO DEPLOYING. Every branch that cannot answer — a push, a manual
+    # dispatch, an unreadable ref — falls through to deploying, because the cost
+    # of guessing wrong that way is a few minutes and the cost of guessing wrong
+    # the other way is a site that silently never updates.
+    - name: Is there anything new to deploy?
+      id: gate
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        REPO: ${{ github.repository }}
+        TRIGGER_SHA: ${{ github.event.workflow_run.head_sha }}
+        EVENT: ${{ github.event_name }}
+        BRANCH: ${{ github.event.repository.default_branch }}
+      run: |
+        set -uo pipefail
+        deploy() { echo "needed=true"  >> "$GITHUB_OUTPUT"; echo "DEPLOY — $1"; exit 0; }
+        skip()   { echo "needed=false" >> "$GITHUB_OUTPUT"; echo "SKIP — $1";   exit 0; }
+
+        [ "$EVENT" = workflow_run ] || deploy "$EVENT, not the blog cron"
+        [ -n "${TRIGGER_SHA:-}" ]   || deploy "the triggering run reported no head_sha"
+
+        head=$(gh api "repos/$REPO/commits/${BRANCH:-main}" --jq .sha 2>/dev/null) || head=""
+        case "${head:-}" in ''|null) deploy "could not read the head of ${BRANCH:-main}";; esac
+
+        if [ "$head" = "$TRIGGER_SHA" ]; then
+          skip "the blog update pushed nothing — ${BRANCH:-main} is still ${TRIGGER_SHA:0:7}"
+        fi
+        deploy "${BRANCH:-main} moved ${TRIGGER_SHA:0:7} -> ${head:0:7}"
+
     - name: Checkout
+      if: steps.gate.outputs.needed == 'true'
       uses: actions/checkout@v4
 
     - name: Setup Node.js
+      if: steps.gate.outputs.needed == 'true'
       uses: actions/setup-node@v4
       with:
         node-version: '22'
         cache: 'npm'
 
+    # Only on a throwaway VM: on the NAS `docs/` survives between runs, so this
+    # downloads what is already on disk and its post-step uploads it back over
+    # the house uplink.
     - name: Restore image cache
+      if: steps.gate.outputs.needed == 'true' && runner.environment == 'github-hosted'
       id: image-cache
       uses: actions/cache@v4
       with:
@@ -48,24 +96,29 @@ jobs:
           images-
 
     - name: Install dependencies
+      if: steps.gate.outputs.needed == 'true'
       run: npm ci
 
     - name: Install sharp for linux
+      if: steps.gate.outputs.needed == 'true'
       run: npm install --os=linux --cpu=x64 sharp
 
     - name: Build site
+      if: steps.gate.outputs.needed == 'true'
       env:
         GOOGLE_ANALYTICS: ${{ vars.GOOGLE_ANALYTICS }}
         YANDEX_METRIKA: ${{ vars.YANDEX_METRIKA }}
       run: npm run build
 
     - name: Copy media files
+      if: steps.gate.outputs.needed == 'true'
       run: |
         if [ -d "public/media" ]; then
           cp -r public/media docs/
         fi
 
     - name: Deploy to GitHub Pages
+      if: steps.gate.outputs.needed == 'true'
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.PAT_TOKEN || secrets.GITHUB_TOKEN }}

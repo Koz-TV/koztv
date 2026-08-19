@@ -15,7 +15,20 @@ concurrency:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    # The self-hosted runners on homenas (`homenas-koztv-1..2`), registered to
+    # this repository, so their minutes are free and their disk persists. There
+    # is no fallback to a hosted runner on purpose: a job aimed at a runner that
+    # is offline simply queues, and the `concurrency` group above cancels it the
+    # moment tomorrow's cron starts. A NAS outage therefore costs a day of blog
+    # updates and cleans up after itself.
+    runs-on: self-hosted
+    # A job with no timeout of its own gets the DEFAULT SIX HOURS, and on a
+    # hosted runner every one of them is billed. The sister repository
+    # Koz-TV/staskoz-site learnt this on 2026-08-19: one step stalled on a dead
+    # package mirror, the job ran 5 h 59 m before the limit killed it, and that
+    # single run cost 361 minutes — more than the whole of July. Nothing here
+    # has any business taking more than a few minutes.
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,7 +37,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '22'
-          cache: 'npm'
+          # Only on a throwaway VM. On the NAS ~/.npm already survives between
+          # runs, so the action's download is redundant and its POST-step upload
+          # ships a cache archive over the house uplink that nothing will read.
+          # Written this way round on purpose: '' is falsy in a GitHub
+          # expression, so `== 'self-hosted' && '' || 'npm'` is 'npm' in both
+          # branches.
+          cache: ${{ runner.environment == 'github-hosted' && 'npm' || '' }}
 
       - name: Install dependencies
         run: npm ci
@@ -50,6 +69,24 @@ jobs:
           npm install koztv-blog-tools@latest
           echo "Package updated"
 
+      # THE ONE STEP THAT CANNOT RUN ON THE NAS DIRECTLY. homenas sits behind a
+      # Russian default route, and Telegram's data centres are unreachable from
+      # it — 149.154.167.51:443 and its siblings simply time out, so this step
+      # would hang until the job timeout rather than fail.
+      #
+      # The machine already has an AmneziaWG tunnel for exactly this:
+      # /usr/local/sbin/arr-vpn.sh routes the whole 172.31.0.0/24 `opsnet`
+      # subnet through it by SOURCE ADDRESS. So the export runs in a container
+      # on that subnet, and everything else stays a plain host step — `npm ci`
+      # and the build reach what they need over the direct route.
+      #
+      # The address is pinned rather than left to Docker because opsnet hands
+      # out low addresses and chess-ops holds 172.31.0.2 statically; a container
+      # that took it after a reboot once killed chess-ops with "Address already
+      # in use". .201 is out of the way (staskoz-site's export uses .200).
+      #
+      # `--user` so the exported posts land owned by the runner and not by root,
+      # which the `git add` below would otherwise refuse to stage.
       - name: Export and translate new posts
         env:
           TELEGRAM_API_ID: ${{ secrets.TELEGRAM_API_ID }}
@@ -58,7 +95,16 @@ jobs:
           LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
           LLM_API_URL: ${{ vars.LLM_API_URL }}
           LLM_MODEL: ${{ vars.LLM_MODEL }}
-        run: npx tg-export --channel ${{ vars.TELEGRAM_CHANNEL || '@koztv' }} --langs en
+          TG_CHANNEL: ${{ vars.TELEGRAM_CHANNEL || '@koztv' }}
+        run: |
+          docker rm -f koztv-telegram-export >/dev/null 2>&1 || true
+          docker run --rm --name koztv-telegram-export \
+            --network opsnet --ip 172.31.0.201 \
+            --user "$(id -u):$(id -g)" -e HOME=/tmp \
+            -e TELEGRAM_API_ID -e TELEGRAM_API_HASH -e TELEGRAM_SESSION \
+            -e LLM_API_KEY -e LLM_API_URL -e LLM_MODEL \
+            -v "$PWD:/w" -w /w node:22 \
+            npx tg-export --channel "$TG_CHANNEL" --langs en
 
       - name: Check for changes
         id: changes
